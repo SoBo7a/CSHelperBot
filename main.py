@@ -2,6 +2,7 @@ import random
 from typing import Final, List
 from dotenv import dotenv_values
 from discord import Intents, Client, Message, VoiceChannel, Guild, Member
+import discord
 
 
 # Load Token from .env
@@ -64,48 +65,74 @@ async def on_message(message: Message) -> None:
 
     # Check for the /teams command
     if user_message.lower() == '/teams' and channel == 'CS2':
-        print("Creating and moving users to teams")
-
-        # Find the CS2 voice channel
-        guild = message.guild
-        cs2_channel = None
-        team1_channel = None
-        team2_channel = None
-
-        for vc in guild.voice_channels:
-            if vc.name == 'CS2':
-                cs2_channel = vc
-            elif vc.name == 'Team 1':
-                team1_channel = vc
-            elif vc.name == 'Team 2':
-                team2_channel = vc
-
-        if cs2_channel and team1_channel and team2_channel:
-            # Get all members in the CS2 channel
-            members = cs2_channel.members
-
-            if len(members) >= 2:
-                # Create two teams
-                team1, team2 = create_teams(members)
-
-                # Move members to their respective team channels
-                await move_members(team1, team1_channel)
-                await move_members(team2, team2_channel)
-
-                # Send a message with the teams
-                team1_names = [member.display_name for member in team1]
-                team2_names = [member.display_name for member in team2]
-
-                response = (
-                    "Teams created and members moved:\n"
-                    f"Team 1: {', '.join(team1_names)} (moved to 'Team 1' voice channel)\n"
-                    f"Team 2: {', '.join(team2_names)} (moved to 'Team 2' voice channel)"
-                )
-                await message.channel.send(response)
-            else:
-                await message.channel.send("Not enough members in the CS2 channel to create teams.")
+        # Check if the author is an administrator
+        if message.author.guild_permissions.administrator:
+            print("Creating and moving users to teams")
+            await create_and_move_teams(message)
         else:
-            await message.channel.send("Could not find the necessary voice channels ('CS2', 'Team 1', 'Team 2').")
+            await message.channel.send("You do not have permission to use this command.")
+
+    # Check for the /back command
+    elif user_message.lower() == '/back':
+        # Check if the author has permission to move members
+        if message.author.guild_permissions.move_members:
+            print("Moving users back to CS2")
+            await move_to_lobby(message)
+        else:
+            await message.channel.send("You do not have permission to use this command.")
+
+
+async def create_and_move_teams(message: Message) -> None:
+    # Find the necessary voice channels
+    guild = message.guild
+    cs2_channel = discord.utils.get(guild.voice_channels, name='CS2')
+    terrorist_channel = discord.utils.get(guild.voice_channels, name='Terrorist')
+    anti_terrorist_channel = discord.utils.get(guild.voice_channels, name='Anti Terrorist')
+
+    if cs2_channel and terrorist_channel and anti_terrorist_channel:
+        # Get all members in the CS2 channel
+        members = cs2_channel.members
+
+        if len(members) >= 2:
+            # Create two teams
+            team1, team2 = create_teams(members)
+
+            # Move members to their respective team channels
+            await move_members(team1, terrorist_channel)
+            await move_members(team2, anti_terrorist_channel)
+
+            # Send a message with the teams
+            team1_names = [member.display_name for member in team1]
+            team2_names = [member.display_name for member in team2]
+
+            response = (
+                "Teams created and members moved:\n"
+                f"Terrorist: {', '.join(team1_names)} (moved to 'Terrorist' voice channel)\n"
+                f"Anti Terrorist: {', '.join(team2_names)} (moved to 'Anti Terrorist' voice channel)"
+            )
+            await message.channel.send(response)
+        else:
+            await message.channel.send("Not enough members in the CS2 channel to create teams.")
+    else:
+        await message.channel.send("Could not find the necessary voice channels ('CS2', 'Terrorist', 'Anti Terrorist').")
+
+
+async def move_to_lobby(message: Message) -> None:
+    # Find the necessary voice channels
+    guild = message.guild
+    cs2_channel = discord.utils.get(guild.voice_channels, name='CS2')
+    terrorist_channel = discord.utils.get(guild.voice_channels, name='Terrorist')
+    anti_terrorist_channel = discord.utils.get(guild.voice_channels, name='Anti Terrorist')
+
+    # Check if the channels exist and the author has permission to move members
+    if cs2_channel and terrorist_channel and anti_terrorist_channel and message.author.guild_permissions.move_members:
+        # Move all members from Terrorist and Anti Terrorist channels to CS2
+        for member in terrorist_channel.members + anti_terrorist_channel.members:
+            await member.move_to(cs2_channel)
+        await message.channel.send("Moved all members back to CS2.")
+    else:
+        await message.channel.send("Could not find the necessary channels or you do not have permission to move members.")
+
 
 
 def main() -> None:
