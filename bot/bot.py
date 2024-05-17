@@ -16,7 +16,7 @@ def setup_bot() -> Client:
     @client.event
     async def on_ready():
         print(f'{client.user} is now running!')
-        tree.copy_global_to(guild=MY_GUILD)
+        tree.copy_global_to(guild=MY_GUILD) # ToDo: just for development, change for production!!!
         await tree.sync(guild=MY_GUILD)
 
     setup_basic_commands(tree, MY_GUILD)

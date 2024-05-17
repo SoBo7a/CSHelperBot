@@ -53,6 +53,6 @@ async def move_to_lobby(interaction) -> None:
     if cs2_channel and terrorist_channel and anti_terrorist_channel:
         for member in terrorist_channel.members + anti_terrorist_channel.members:
             await member.move_to(cs2_channel)
-        await interaction.response.send_message("Moved all members back to CS2.")
+        await interaction.followup.send("Moved all members back to CS2.")
     else:
-        await interaction.response.send_message("Could not find the necessary channels or you do not have permission to move members.")
+        await interaction.followup.send("Could not find the necessary channels or you do not have permission to move members.")
