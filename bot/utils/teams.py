@@ -1,10 +1,12 @@
 import random
 from typing import List
-from discord import Guild, Member, VoiceChannel, utils
+from discord import Guild, Member, VoiceChannel, utils, Embed
+
 
 async def get_voice_channels(guild: Guild):
     voice_channels = [channel for channel in guild.channels if isinstance(channel, VoiceChannel)]
     return voice_channels
+
 
 def create_teams(members: List[Member]):
     random.shuffle(members)
@@ -13,9 +15,11 @@ def create_teams(members: List[Member]):
     team2 = members[mid_index:]
     return team1, team2
 
+
 async def move_members(members: List[Member], target_channel: VoiceChannel):
     for member in members:
         await member.move_to(target_channel)
+
 
 async def create_and_move_teams(interaction) -> str:
     guild = interaction.guild
@@ -25,24 +29,24 @@ async def create_and_move_teams(interaction) -> str:
 
     if cs2_channel and terrorist_channel and anti_terrorist_channel:
         members = cs2_channel.members
-        if len(members) >= 2:
-            team1, team2 = create_teams(members)
-            await move_members(team1, terrorist_channel)
-            await move_members(team2, anti_terrorist_channel)
+        team1, team2 = create_teams(members)
 
-            team1_names = [member.display_name for member in team1]
-            team2_names = [member.display_name for member in team2]
+        # Create an embed
+        embed = Embed(title="Teams created and members moved", color=0xFF5733)
 
-            response = (
-                "Teams created and members moved:\n"
-                f"Terrorist: {', '.join(team1_names)} (moved to 'Terrorist' voice channel)\n"
-                f"Anti Terrorist: {', '.join(team2_names)} (moved to 'Anti Terrorist' voice channel)"
-            )
-            return response
-        else:
-            return "Not enough members in the CS2 channel to create teams."
+        # Add fields for each team
+        for team_name, team_members in [("Terrorists", team1), ("Anti Terrorists", team2)]:
+            team_member_names = "\n".join([member.display_name for member in team_members])
+            embed.add_field(name=f"**{team_name}**", value=team_member_names, inline=True)
+
+        # Move members to respective channels
+        await move_members(team1, terrorist_channel)
+        await move_members(team2, anti_terrorist_channel)
+
+        return embed
     else:
         return "Could not find the necessary voice channels ('CS2', 'Terrorist', 'Anti Terrorist')."
+
 
 async def move_to_lobby(interaction) -> None:
     guild = interaction.guild
