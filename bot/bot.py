@@ -1,6 +1,8 @@
 import discord
 from discord import Intents, Client, app_commands
-from .commands.teams import setup_team_commands
+from bot.commands import setup_commands
+
+
 
 def setup_bot() -> Client:
     intents = Intents.default()
@@ -18,6 +20,6 @@ def setup_bot() -> Client:
         tree.copy_global_to(guild=MY_GUILD) # ToDo: just for development, change for production!!!
         await tree.sync(guild=MY_GUILD)
 
-    setup_team_commands(tree, MY_GUILD)
+    setup_commands(tree, MY_GUILD)
 
     return client
