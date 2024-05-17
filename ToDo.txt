@@ -1,0 +1,7 @@
+- Create Server
+    - start server automatically
+    - start python bot with the server (crontab?!)
+
+- Get autocomplete for /-commands working
+
+- Add voice channels using /config (no hardcoding)
