@@ -22,7 +22,7 @@ wingman_maps = [
     "Cobblestone (B bombsite)",
     "Inferno (A bombsite)",
     "Lake",
-    "Memento"
+    "Memento",
     "Overpass (B bombsite)",
     "Shortdust",
     "Shortnuke",

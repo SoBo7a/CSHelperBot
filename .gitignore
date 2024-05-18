@@ -19,3 +19,4 @@ env/
 # Other
 .DS_Store
 .env
+.db

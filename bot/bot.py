@@ -1,7 +1,7 @@
 import discord
 from discord import Intents, Client, app_commands
 from bot.commands import setup_commands
-
+from bot.utils.database import init_db
 
 
 def setup_bot() -> Client:
@@ -20,6 +20,7 @@ def setup_bot() -> Client:
         tree.copy_global_to(guild=MY_GUILD) # ToDo: just for development, change for production!!!
         await tree.sync(guild=MY_GUILD)
 
+    init_db()
     setup_commands(tree, MY_GUILD)
 
     return client
