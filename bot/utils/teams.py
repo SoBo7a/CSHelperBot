@@ -37,7 +37,8 @@ async def create_and_move_teams(interaction) -> str:
         # Add fields for each team
         for team_name, team_members in [("Terrorists", team1), ("Anti Terrorists", team2)]:
             team_member_names = "\n".join([member.display_name for member in team_members])
-            embed.add_field(name=f"**{team_name}**", value=team_member_names, inline=True)
+            team_size = len(team_members)
+            embed.add_field(name=f"**{team_name} ({team_size})**", value=team_member_names, inline=True)
 
         # Move members to respective channels
         await move_members(team1, terrorist_channel)

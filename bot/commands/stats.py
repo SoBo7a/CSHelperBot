@@ -1,5 +1,3 @@
-import sqlite3
-import os
 import urllib.request
 import json
 import config.settings as settings

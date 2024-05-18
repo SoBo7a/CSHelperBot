@@ -4,18 +4,17 @@ from bot.utils.teams import create_and_move_teams, move_to_lobby
 
 
 class TeamButtons(discord.ui.View):
-    def __init__(self, interaction: discord.Interaction):
+    def __init__(self):
         super().__init__(timeout=None)
-        self.interaction = interaction
 
     @discord.ui.button(label="End Session", style=discord.ButtonStyle.red)
     async def end_session_button(self,interaction:discord.Interaction,button:discord.ui.Button):
-        if not self.interaction.user.guild_permissions.move_members:
-            await self.interaction.response.send_message("You do not have permission to use this command.")
+        if not interaction.user.guild_permissions.move_members:
+            await interaction.response.send_message("You do not have permission to use this command.")
             return
         
         await interaction.response.edit_message(view=None)
-        await move_to_lobby(self.interaction)
+        await move_to_lobby(interaction)
         
 
 def setup_team_commands(tree: app_commands.CommandTree, guild):
@@ -41,7 +40,7 @@ def setup_team_commands(tree: app_commands.CommandTree, guild):
         
         msg = await create_and_move_teams(interaction)
         if type(msg) == str:
-            await interaction.response.send_message(msg, view=TeamButtons(interaction))
+            await interaction.response.send_message(msg, view=TeamButtons())
         else:
-            await interaction.response.send_message(embed=msg, view=TeamButtons(interaction))
+            await interaction.response.send_message(embed=msg, view=TeamButtons())
         return

@@ -1,1 +1,3 @@
 - Add voice channels using /config (no hardcoding)
+
+- Implement /play that invites all subscribed users to the cs2 channel or notifies them that a user wants to play cs2
