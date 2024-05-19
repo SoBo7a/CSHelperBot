@@ -2,7 +2,10 @@
 
 - add more stats
 
-- implement cooldown for /stats
 - improve best weapon and map by calculating eg. win rates for each map
 
 - implement more error handling and logging
+
+- check where the /name command comes from
+
+- update the bots description in discord

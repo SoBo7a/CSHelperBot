@@ -1,7 +1,10 @@
 from discord import app_commands, Interaction, Embed
 from bot.utils.stats import get_steam_stats, get_value_by_key, get_best_map, get_best_weapon
 from bot.utils.stats_database import add_user, get_steam_id
+import time
 
+# Dictionary to keep track of last used time
+user_last_used = {}
 
 def setup_stats_commands(tree: app_commands.CommandTree, guild):
     """
@@ -27,12 +30,20 @@ def setup_stats_commands(tree: app_commands.CommandTree, guild):
     @app_commands.describe(steamid="Setup your Steam ID.")
     async def stats(interaction: Interaction, steamid: str = None):
         discord_id = str(interaction.user.id)
+        current_time = time.time()
+
+        # Check if user is rate limited
+        if steamid is None and discord_id in user_last_used:
+            last_used = user_last_used[discord_id]
+            if current_time - last_used < 180:  # 3 minutes = 180 seconds
+                await interaction.response.send_message(f"Please wait 3 Minutes before using this command again.", ephemeral=True)
+                return
 
         if steamid:
             # If a Steam ID is provided, set it up
             discord_username = str(interaction.user)
             add_user(discord_id, discord_username, steamid)
-            await interaction.response.send_message(f"Steam ID {steamid} has been set up for {interaction.user.mention}.")
+            await interaction.response.send_message(f"Steam ID {steamid} has been set up for {interaction.user.mention}.", ephemeral=True)
         else:
             # If no Steam ID is provided, try to fetch and display the stored Steam ID
             stored_steam_id = get_steam_id(discord_id)
@@ -46,7 +57,7 @@ def setup_stats_commands(tree: app_commands.CommandTree, guild):
                         total_kills = get_value_by_key(player_stats, 'total_kills')
                         total_deaths = get_value_by_key(player_stats, 'total_deaths')
                         kd_ratio = round(total_kills / total_deaths, 2)
-                        total_time_played = round(get_value_by_key(player_stats, 'total_time_played') / 3600, 2)
+                        total_time_played = str(round(get_value_by_key(player_stats, 'total_time_played') / 3600, 2)) + ' h'
 
                         # Extracting win/loss stats
                         total_matches_won = get_value_by_key(player_stats, 'total_matches_won')
@@ -64,7 +75,7 @@ def setup_stats_commands(tree: app_commands.CommandTree, guild):
 
                         # Create an embed
                         embed = Embed(title="CS2 Stats", description=interaction.user.mention)
-                        embed.add_field(name="Total Time Played (Hours)", value=total_time_played, inline=True)
+                        embed.add_field(name="Total Time Played", value=total_time_played, inline=True)
                         embed.add_field(name="Best Map", value=best_map, inline=True)
                         embed.add_field(name="Best Weapon", value=best_weapon, inline=True)
                         embed.add_field(name="Total Kills", value=total_kills, inline=True)
@@ -82,3 +93,7 @@ def setup_stats_commands(tree: app_commands.CommandTree, guild):
                     await interaction.response.send_message("Failed to retrieve stats data.")
             else:
                 await interaction.response.send_message("You have not set up your Steam ID yet. Use `/stats steamid YOUR_STEAM_ID` to set it up.")
+        
+        # Update the last used time for the user
+        if steamid is None:
+            user_last_used[discord_id] = current_time
