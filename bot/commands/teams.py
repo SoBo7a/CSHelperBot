@@ -22,25 +22,28 @@ def setup_team_commands(tree: app_commands.CommandTree, guild):
     @tree.command(description="Creates and moves Users to Teams.")
     async def teams(interaction: discord.Interaction):
         if not interaction.user.guild_permissions.administrator:
-            await interaction.response.send_message("You do not have permission to use this command.")
+            await interaction.response.send_message("You do not have permission to use this command.", ephemeral=True)
             return
 
         if interaction.user.voice is None or interaction.user.voice.channel.name != 'CS2':
-            await interaction.response.send_message("You need to be in the 'CS2' voice channel to use this command.")
+            await interaction.response.send_message("You need to be in the 'CS2' voice channel to use this command.", ephemeral=True)
             return
 
         cs2_channel = utils.get(interaction.guild.voice_channels, name='CS2')
         if cs2_channel:
             if len(cs2_channel.members) < 2:
-                await interaction.response.send_message("There are not enough members in the CS2 channel to create teams.")
+                await interaction.response.send_message("There are not enough members in the CS2 channel to create teams.", ephemeral=True)
                 return
         else:
-            await interaction.response.send_message("[ERROR] CS2 Channel not found!")
+            await interaction.response.send_message("[ERROR] CS2 Channel not found!", ephemeral=True)
             return
         
+        # Send an initial response acknowledging the interaction
+        await interaction.response.send_message("Creating teams and moving members...", ephemeral=True)
+        
+        # Create and move teams
         msg = await create_and_move_teams(interaction)
         if type(msg) == str:
-            await interaction.response.send_message(msg, view=TeamButtons())
+            await interaction.followup.send(msg, view=TeamButtons())
         else:
-            await interaction.response.send_message(embed=msg, view=TeamButtons())
-        return
+            await interaction.followup.send(embed=msg, view=TeamButtons())
