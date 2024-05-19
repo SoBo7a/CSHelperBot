@@ -107,7 +107,7 @@ python main.py
     - /stats: Retrieves and displays the stored stats for the user.
 
 ## License
-This project is licensed under the MIT License. See the [LICENSE]() file for more details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/SoBo7a/CSHelperBot/blob/LICENSE.md) file for more details.
 
 ## Acknowledgements
 - [discord.py](https://github.com/Rapptz/discord.py) - An API wrapper for Discord written in Python.
