@@ -37,9 +37,10 @@ STEAM_API_KEY: YOUR_STEAM_API_KEY
 - Create a folder called "data" in the root directory of the project.
 - Create "play.db" and "stats.db" in the "data" directory
 
-5. Run the bot:
+6. Run the bot:
+```bash
 python main.py
-
+```
 
 ## Commands
 
