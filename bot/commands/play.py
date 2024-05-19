@@ -54,7 +54,7 @@ def setup_play_commands(tree: app_commands.CommandTree, guild):
         failed_mentions = []
         for user_id, _ in subscriptions:
             user = await interaction.client.fetch_user(int(user_id))
-            if user:
+            if user and int(interaction.user.id) != int(user_id):
                 try:
                     cs2_channel = utils.get(interaction.guild.voice_channels, name='CS2')
                     if cs2_channel:

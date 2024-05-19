@@ -1,6 +1,6 @@
-from dotenv import dotenv_values
+from dotenv import dotenv_values, find_dotenv
 
-config = dotenv_values(".env")
+config = dotenv_values(find_dotenv())
 TOKEN = config.get('TOKEN')
 STEAM_API_KEY = config.get('STEAM_API_KEY')
 
