@@ -21,7 +21,6 @@ def setup_play_commands(tree: app_commands.CommandTree, guild):
         mention = interaction.user.mention
         user_id = str(interaction.user.id)
         username = str(interaction.user)
-        user = interaction.user
 
         # Check if the action is subscribe or unsubscribe
         if action in ["subscribe", "unsubscribe"]:
@@ -49,27 +48,30 @@ def setup_play_commands(tree: app_commands.CommandTree, guild):
             await interaction.response.send_message(f"{mention}, you are not subscribed to /play notifications. Use `/play subscribe` to subscribe.", ephemeral=True)
             return
 
+        # Send an initial response acknowledging the interaction
+        await interaction.response.send_message("Sending invites...", ephemeral=True)
+
         # Send message to all subscribed users
-        # ToDo: Dont send invite to the user who invoked the command
         failed_mentions = []
-        for user_id, _ in subscriptions:
-            user = await interaction.client.fetch_user(int(user_id))
-            if user and int(interaction.user.id) != int(user_id):
+        for sub_user_id, _ in subscriptions:
+            if user_id != sub_user_id:
                 try:
+                    sub_user = await interaction.client.fetch_user(int(sub_user_id))
                     cs2_channel = utils.get(interaction.guild.voice_channels, name='CS2')
                     if cs2_channel:
                         invite = await cs2_channel.create_invite(max_age=3600, max_uses=1)
-                        await user.send(f"{mention} wants to play CS2! Join us in the CS2 voice channel: {invite.url}")
+                        await sub_user.send(f"{mention} wants to play CS2! Join us in the CS2 voice channel: {invite.url}")
                     else:
-                        await interaction.response.send_message("CS2 voice channel not found.", ephemeral=True)
+                        await interaction.followup.send("CS2 voice channel not found.", ephemeral=True)
                         return
                 except Forbidden:
-                    failed_mentions.append(user.mention)
+                    failed_mentions.append(sub_user.mention)
 
         if failed_mentions:
-            await interaction.response.send_message(
+            await interaction.followup.send(
                 f"{mention} wants to play CS2.\n"
-                f"Can't invite the following users, due to their discord privacy settings: {', '.join(failed_mentions)}."
+                f"Can't invite the following users, due to their discord privacy settings: {', '.join(failed_mentions)}.",
+                ephemeral=True
             )
         else:
-            await interaction.response.send_message("Players have been invited.", ephemeral=True)
+            await interaction.followup.send("Players have been invited.", ephemeral=True)
