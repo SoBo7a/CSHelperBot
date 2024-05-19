@@ -71,7 +71,6 @@ def setup_play_commands(tree: app_commands.CommandTree, guild):
             await interaction.followup.send(
                 f"{mention} wants to play CS2.\n"
                 f"Can't invite the following users, due to their discord privacy settings: {', '.join(failed_mentions)}.",
-                ephemeral=True
             )
         else:
-            await interaction.followup.send("Players have been invited.", ephemeral=True)
+            await interaction.followup.send("Players have been invited.")
