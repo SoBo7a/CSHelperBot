@@ -21,15 +21,20 @@ def setup_team_commands(tree: app_commands.CommandTree, guild):
     
     @tree.command(description="Creates and moves Users to Teams.")
     async def teams(interaction: discord.Interaction):
+        cs2_channel = utils.get(interaction.guild.voice_channels, name='CS2')
+
         if not interaction.user.guild_permissions.administrator:
             await interaction.response.send_message("You do not have permission to use this command.", ephemeral=True)
+            return
+        
+        if interaction.channel.id != cs2_channel.id:
+            await interaction.response.send_message("You can only use the /teams command in the CS2 voice channel.", ephemeral=True)
             return
 
         if interaction.user.voice is None or interaction.user.voice.channel.name != 'CS2':
             await interaction.response.send_message("You need to be in the 'CS2' voice channel to use this command.", ephemeral=True)
             return
 
-        cs2_channel = utils.get(interaction.guild.voice_channels, name='CS2')
         if cs2_channel:
             if len(cs2_channel.members) < 2:
                 await interaction.response.send_message("There are not enough members in the CS2 channel to create teams.", ephemeral=True)
