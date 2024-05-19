@@ -4,9 +4,11 @@ from discord import app_commands
 from bot.commands.teams import setup_team_commands
 from bot.commands.maps import setup_map_commands
 from bot.commands.stats import setup_stats_commands
+from bot.commands.play import setup_play_commands
 
 
 def setup_commands(tree: app_commands.CommandTree, guild):
     setup_team_commands(tree, guild)
     setup_map_commands(tree, guild)
     setup_stats_commands(tree, guild)
+    setup_play_commands(tree, guild)

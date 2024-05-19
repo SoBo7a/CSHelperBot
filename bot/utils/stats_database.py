@@ -8,7 +8,7 @@ def get_db_path():
     return db_path
 
 
-def init_db():
+def init_db_stats():
     db_path = get_db_path()
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
     conn = sqlite3.connect(db_path)

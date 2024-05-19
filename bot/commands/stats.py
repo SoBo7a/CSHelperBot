@@ -1,8 +1,9 @@
+# ToDo: Implement error handling if user is not sharing game data
 import urllib.request
 import json
 import config.settings as settings
 from discord import app_commands, Interaction, Embed
-from bot.utils.database import add_user, get_steam_id
+from bot.utils.stats_database import add_user, get_steam_id
 
 # Function to get the Steam stats
 def get_steam_stats(steam_id: str) -> dict:
