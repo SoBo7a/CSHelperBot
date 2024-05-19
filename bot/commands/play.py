@@ -1,6 +1,9 @@
-# ToDo: implement rate limiting
 from discord import app_commands, Interaction, Forbidden, utils, VoiceChannel, Guild
 from bot.utils.play_database import add_subscription, get_subscriptions, delete_subscriptions
+from time import time
+
+# Dictionary to store user IDs and their last request timestamps
+cooldowns = {}
 
 async def get_voice_channels(guild: Guild):
     voice_channels = [channel for channel in guild.channels if isinstance(channel, VoiceChannel)]
@@ -20,19 +23,26 @@ def setup_play_commands(tree: app_commands.CommandTree, guild):
         username = str(interaction.user)
         user = interaction.user
 
-        if action not in ["subscribe", "unsubscribe", ""]:
-            await interaction.response.send_message("Invalid action. Use 'subscribe' or 'unsubscribe'.", ephemeral=True)
+        # Check if the action is subscribe or unsubscribe
+        if action in ["subscribe", "unsubscribe"]:
+            if action == "subscribe":
+                add_subscription(user_id, username)
+                await interaction.response.send_message(f"{mention}, you have been subscribed to CS2 play notifications.", ephemeral=True)
+            elif action == "unsubscribe":
+                delete_subscriptions(user_id)
+                await interaction.response.send_message(f"{mention}, you have been unsubscribed from CS2 play notifications.", ephemeral=True)
             return
 
-        if action == "subscribe":
-            add_subscription(user_id, username)
-            await interaction.response.send_message(f"{mention}, you have been subscribed to CS2 play notifications.", ephemeral=True)
-            return
+        # Check if user is on cooldown
+        if user_id in cooldowns:
+            last_request_time = cooldowns[user_id]
+            elapsed_time = time() - last_request_time
+            if elapsed_time < 180:  # Cooldown period in seconds
+                await interaction.response.send_message(f"{mention}, you are on cooldown. Please wait before using this command again.", ephemeral=True)
+                return
 
-        if action == "unsubscribe":
-            delete_subscriptions(user_id)
-            await interaction.response.send_message(f"{mention}, you have been unsubscribed from CS2 play notifications.", ephemeral=True)
-            return
+        # Update cooldown
+        cooldowns[user_id] = time()
 
         subscriptions = get_subscriptions()
         if (user_id, username) not in subscriptions:
@@ -40,16 +50,15 @@ def setup_play_commands(tree: app_commands.CommandTree, guild):
             return
 
         # Send message to all subscribed users
-        subscribed_user_ids = [user_id for user_id, _ in subscriptions]
+        # ToDo: Dont send invite to the user who invoked the command
         failed_mentions = []
-        for user_id, username in subscriptions:
+        for user_id, _ in subscriptions:
             user = await interaction.client.fetch_user(int(user_id))
             if user:
                 try:
                     cs2_channel = utils.get(interaction.guild.voice_channels, name='CS2')
                     if cs2_channel:
                         invite = await cs2_channel.create_invite(max_age=3600, max_uses=1)
-                        # ToDo: dont send message and invite to command executor
                         await user.send(f"{mention} wants to play CS2! Join us in the CS2 voice channel: {invite.url}")
                     else:
                         await interaction.response.send_message("CS2 voice channel not found.", ephemeral=True)
@@ -60,8 +69,7 @@ def setup_play_commands(tree: app_commands.CommandTree, guild):
         if failed_mentions:
             await interaction.response.send_message(
                 f"{mention} wants to play CS2.\n"
-                f"Can't invite the following users, due to their discord privacy settings: {', '.join(failed_mentions)}.",
-                ephemeral=True
+                f"Can't invite the following users, due to their discord privacy settings: {', '.join(failed_mentions)}."
             )
         else:
             await interaction.response.send_message("Players have been invited.", ephemeral=True)
