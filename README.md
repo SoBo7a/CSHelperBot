@@ -3,7 +3,7 @@ Discord CS Helper Bot is a Discord bot designed to manage and facilitate CS2 pla
 
 ## Features
 - Play Notifications: Users can subscribe to receive notifications when someone wants to play CS2.
-- Team Management: Automatically create and move users into teams within designated voice channels.
+- Team Management: Randomly move users into teams within designated voice channels.
 - Stats Tracking: Retrieve CS2 player statistics from Steam.
 - Random Map: Get a random Map out of a list of all CS2 Maps. You can get either Standard or Wingman Maps.
 
@@ -41,6 +41,12 @@ STEAM_API_KEY: YOUR_STEAM_API_KEY
 ```bash
 python main.py
 ```
+
+7. Setup Voice channels on your Discord server:
+- Create the following voice channels, for /teams command to work:
+    - CS2
+    - Terrorists
+    - Anti Terrorists
 
 ## Commands
 
