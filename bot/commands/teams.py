@@ -55,7 +55,6 @@ def setup_team_commands(tree: app_commands.CommandTree, guild):
             await interaction.response.send_message("[ERROR] CS2 Channel not found!", ephemeral=True)
             return
         
-        # Send an initial response acknowledging the interaction
         await interaction.response.send_message("Creating teams and moving members...", ephemeral=True)
         
         # Create and move teams

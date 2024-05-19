@@ -80,12 +80,12 @@ def setup_play_commands(tree: app_commands.CommandTree, guild):
         # Update cooldown
         cooldowns[user_id] = time()
 
+        # Check if the user is subscribed
         subscriptions = get_subscriptions()
         if (user_id, username) not in subscriptions:
             await interaction.response.send_message(f"{mention}, you are not subscribed to /play notifications. Use `/play subscribe` to subscribe.", ephemeral=True)
             return
 
-        # Send an initial response acknowledging the interaction
         await interaction.response.send_message("Sending invites...", ephemeral=True)
 
         # Send message to all subscribed users

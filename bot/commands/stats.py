@@ -77,7 +77,7 @@ def setup_stats_commands(tree: app_commands.CommandTree, guild):
                         # Send the embed
                         await interaction.response.send_message(embed=embed)
                     else:
-                        await interaction.response.send_message(f"Failed to retrieve stats for Steam ID: **{stored_steam_id}**")
+                        await interaction.response.send_message("Failed to retrieve object 'playerstats'")
                 else:
                     await interaction.response.send_message("Failed to retrieve stats data.")
             else:

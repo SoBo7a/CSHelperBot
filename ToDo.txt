@@ -2,7 +2,7 @@
 
 - add more stats
 
-- further code refactoring / cleanup
-
 - implement cooldown for /stats
 - improve best weapon and map by calculating eg. win rates for each map
+
+- implement more error handling and logging
