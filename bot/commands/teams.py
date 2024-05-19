@@ -4,6 +4,9 @@ from bot.utils.teams import create_and_move_teams, move_to_lobby
 
 
 class TeamButtons(discord.ui.View):
+    """
+    A custom UI view for handling the "End Session" button
+    """
     def __init__(self):
         super().__init__(timeout=None)
 
@@ -18,6 +21,15 @@ class TeamButtons(discord.ui.View):
         
 
 def setup_team_commands(tree: app_commands.CommandTree, guild):
+    """
+    This function registers the /teams command and its associated functionality. It ensures that the command
+    is only executable by users with administrator permissions in the CS2 voice channel. When executed, it creates
+    teams and moves users into them.
+
+    Args:
+        tree (app_commands.CommandTree): The command tree to register the command to.
+        guild: The guild to associate the command with.
+    """
     
     @tree.command(description="Creates and moves Users to Teams.")
     async def teams(interaction: discord.Interaction):

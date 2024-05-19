@@ -4,11 +4,29 @@ from discord import Guild, Member, VoiceChannel, utils, Embed
 
 
 async def get_voice_channels(guild: Guild):
+    """
+    Retrieve all voice channels in a guild.
+
+    Args:
+        guild (Guild): The guild to search for voice channels.
+
+    Returns:
+        List[VoiceChannel]: A list of voice channels in the guild.
+    """
     voice_channels = [channel for channel in guild.channels if isinstance(channel, VoiceChannel)]
     return voice_channels
 
 
 def create_teams(members: List[Member]):
+    """
+    Create two teams from a list of members.
+
+    Args:
+        members (List[Member]): The list of members to divide into teams.
+
+    Returns:
+        tuple[List[Member], List[Member]]: A tuple containing two lists of members representing the teams.
+    """
     random.shuffle(members)
     mid_index = len(members) // 2
     team1 = members[:mid_index]
@@ -17,11 +35,27 @@ def create_teams(members: List[Member]):
 
 
 async def move_members(members: List[Member], target_channel: VoiceChannel):
+    """
+    Move members to a target voice channel.
+
+    Args:
+        members (List[Member]): The list of members to move.
+        target_channel (VoiceChannel): The voice channel to move the members to.
+    """
     for member in members:
         await member.move_to(target_channel)
 
 
 async def create_and_move_teams(interaction) -> str:
+    """
+    Create teams and move members to respective channels.
+
+    Args:
+        interaction: The interaction object from Discord.
+
+    Returns:
+        str: A message indicating the outcome of the operation.
+    """
     guild = interaction.guild
     cs2_channel = utils.get(guild.voice_channels, name='CS2')
     terrorist_channel = utils.get(guild.voice_channels, name='Terrorist')
@@ -50,6 +84,12 @@ async def create_and_move_teams(interaction) -> str:
 
 
 async def move_to_lobby(interaction) -> None:
+    """
+    Move all members from team channels back to the lobby.
+
+    Args:
+        interaction: The interaction object from Discord.
+    """
     guild = interaction.guild
     cs2_channel = utils.get(guild.voice_channels, name='CS2')
     terrorist_channel = utils.get(guild.voice_channels, name='Terrorist')

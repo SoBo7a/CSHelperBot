@@ -2,15 +2,52 @@ from discord import app_commands, Interaction, Forbidden, utils, VoiceChannel, G
 from bot.utils.play_database import add_subscription, get_subscriptions, delete_subscriptions
 from time import time
 
+
 # Dictionary to store user IDs and their last request timestamps
 cooldowns = {}
 
+
 async def get_voice_channels(guild: Guild):
+    """
+    Retrieves all voice channels in the given guild.
+
+    Parameters:
+    - guild (discord.Guild): The guild from which to retrieve voice channels.
+
+    Returns:
+    - list: A list of VoiceChannel objects in the guild.
+    """
     voice_channels = [channel for channel in guild.channels if isinstance(channel, VoiceChannel)]
     return voice_channels
 
+
 def setup_play_commands(tree: app_commands.CommandTree, guild):    
-    
+    """
+    Set up the /play command for managing CS2 play notifications and sending play invites.
+
+    This function registers the /play command, which allows users to subscribe to or unsubscribe from 
+    notifications for CS2 play sessions, and to notify subscribed users when someone wants to play.
+
+    Parameters:
+    - tree (app_commands.CommandTree): The command tree to which the command will be added.
+    - guild (discord.Guild): The guild for which the command is being set up.
+
+    Command Description:
+    - /play: Manage CS2 play notifications or notify others to play.
+      - action (optional): Choose 'subscribe' to subscribe or 'unsubscribe' to unsubscribe from play notifications.
+        - Subscribe: Subscribes the user to CS2 play notifications.
+        - Unsubscribe: Unsubscribes the user from CS2 play notifications.
+      - If no action is specified, it will send play invites to all subscribed users.
+
+    Cooldown:
+    - Prevents the user from spamming the /play command by enforcing a cooldown period of 180 seconds.
+
+    Permissions:
+    - Only users who are subscribed will receive play notifications.
+
+    Example:
+        setup_play_commands(bot.tree, some_guild)
+    """
     @tree.command(description="Let everyone know you want to play CS2 or manage your subscription.")
     @app_commands.describe(action="Choose 'subscribe' to subscribe or 'unsubscribe' to unsubscribe from play notifications for CS2")
     @app_commands.choices(action=[

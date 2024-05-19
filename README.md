@@ -111,4 +111,4 @@ This project is licensed under the MIT License. See the [LICENSE](https://github
 
 ## Acknowledgements
 - [discord.py](https://github.com/Rapptz/discord.py) - An API wrapper for Discord written in Python.
-- CSButler logo - The logo for the Bot created by SonZZa.
+- CSButler logo - The logo for the Bot created by [SonZza](https://x.com/SonZza4Real).

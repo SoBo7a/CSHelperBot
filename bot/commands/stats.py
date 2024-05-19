@@ -1,58 +1,28 @@
-import urllib.request
-import json
-import config.settings as settings
 from discord import app_commands, Interaction, Embed
+from bot.utils.stats import get_steam_stats, get_value_by_key, get_best_map, get_best_weapon
 from bot.utils.stats_database import add_user, get_steam_id
 
-# Function to get the Steam stats
-def get_steam_stats(steam_id: str) -> dict:
-    key = settings.STEAM_API_KEY
-    appid = "730"
-    url = f"http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?appid={appid}&key={key}&steamid={steam_id}"
-    
-    with urllib.request.urlopen(url) as response:
-        data = response.read()
-        return json.loads(data)
-    
-# Function to extract value by key from list of dictionaries
-def get_value_by_key(stats_list, key):
-    for stats_dict in stats_list:
-        if stats_dict.get('name') == key:
-            return stats_dict.get('value')
-    return None
-
-# Function to find the best map
-def get_best_map(stats_list):
-    best_map = None
-    highest_wins = -1
-    
-    for stats_dict in stats_list:
-        name = stats_dict.get('name')
-        if name and name.startswith('total_wins_map_'):
-            wins = stats_dict.get('value')
-            if wins > highest_wins:
-                highest_wins = wins
-                best_map = name.split('_')[-2] + "_" + name.split('_')[-1]
-    
-    return best_map, highest_wins
-
-# Function to find the best weapon
-def get_best_weapon(stats_list):
-    best_weapon = None
-    highest_kills = -1
-    
-    for stats_dict in stats_list:
-        name = stats_dict.get('name')
-        if name and name.startswith('total_kills_') and name not in ["total_kills_headshot", "total_kills_enemy_weapon"]:
-            kills = stats_dict.get('value')
-            if kills > highest_kills:
-                highest_kills = kills
-                best_weapon = name.split('_')[-1]
-    
-    return best_weapon, highest_kills
 
 def setup_stats_commands(tree: app_commands.CommandTree, guild):
+    """
+    Set up the /stats command for managing and displaying CS2 stats.
 
+    This function registers the /stats command, which allows users to set up their Steam ID and
+    retrieve their CS2 game statistics, including total kills, total deaths, KD ratio, total time
+    played, win rate, best map, and best weapon.
+
+    Parameters:
+    - tree (app_commands.CommandTree): The command tree to which the command will be added.
+    - guild (discord.Guild): The guild for which the command is being set up.
+
+    Command Description:
+    - /stats: Manage CS2 stats.
+      - steamid: Provide your Steam ID to set it up for retrieving stats.
+        - If provided, the command will save the Steam ID for the user.
+
+    Example:
+        setup_stats_commands(bot.tree, some_guild)
+    """
     @tree.command(description="Manage your CS2 Stats.")
     @app_commands.describe(steamid="Setup your Steam ID.")
     async def stats(interaction: Interaction, steamid: str = None):
