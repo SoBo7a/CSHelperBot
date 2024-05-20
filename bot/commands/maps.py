@@ -1,5 +1,7 @@
 from discord import app_commands, Interaction
 from bot.utils.maps import get_random_map, cs2_maps, wingman_maps
+from bot.utils.translations import translate
+
 
 def setup_map_commands(tree: app_commands.CommandTree, guild):
     """
@@ -21,8 +23,8 @@ def setup_map_commands(tree: app_commands.CommandTree, guild):
     Example:
         setup_map_commands(bot.tree, some_guild)
     """
-    @tree.command(description="Selects a random CS2 map.")
-    @app_commands.describe(mode="Choose between standard or wingman maps.")
+    @tree.command(description=translate("commands.maps.description"))
+    @app_commands.describe(mode=translate("commands.maps.choice_describe"))
     @app_commands.choices(mode=[
         app_commands.Choice(name="Standard", value="standard"),
         app_commands.Choice(name="Wingman", value="wingman")
@@ -33,4 +35,4 @@ def setup_map_commands(tree: app_commands.CommandTree, guild):
         else:
             random_map = get_random_map(cs2_maps)
 
-        await interaction.response.send_message(f"The selected map is: **{random_map}**")
+        await interaction.response.send_message(translate("commands.maps.response") + f" **{random_map}**")

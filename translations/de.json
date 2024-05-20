@@ -36,5 +36,47 @@
         "topic_instructions": "Willkommen zur Anleitung für den CS Butler Bot. Diese Anleitung erklärt die Nutzung des Bots und seine Funktionen.",
 
         "topic_commands": "Dieser Kanal ist für Befehle des CS Butler reserviert und verhindert die unnötige Nutzung anderer Textkanäle."
+    },
+
+
+    "commands": {
+        "maps": {
+            "description": "Wählt eine zufällige CS2 Karte.",
+            "choice_describe": "Wähle zwischen Standard und Wingman Maps.",
+            "response": "Die ausgewählte Karte ist:"
+        },
+
+        "play": {
+            "description": "Mitglieder zum CS2 spielen Einladen, oder Abonnement verwalten.",
+            "choice_describe": "'Subscribe', um sich für Spielbenachrichtigungen für CS2 anzumelden, oder 'Unsubscribe', um sich abzumelden.",
+            "sub_response": ", du wurdest für CS2-Spielbenachrichtigungen abonniert.",
+            "unsub_response": ", du wurdest von den CS2-Spielbenachrichtigungen abgemeldet.",
+            "cooldown": ", du befindest sich in der Abklingzeit. Bitte warte, bevor du diesen Befehl erneut verwendest.",
+            "not_subscribed": ", du bist nicht für /play-Benachrichtigungen abonniert. Verwende `/play subscribe`, um zu abonnieren.",
+            "inviting": "Einladungen werden gesendet...",
+            "priv_message": " möchte CS2 spielen! Trete uns im CS2-Sprachkanal bei: ",
+            "mentions": " möchte CS2 spielen.\nDie folgenden Benutzer können aufgrund ihrer Discord-Datenschutzeinstellungen nicht eingeladen werden:",
+            "success": "Spieler wurden eingeladen."
+        },
+
+        "stats": {
+            "description": "Verwalten Sie Ihre CS2-Statistiken.",
+            "choice_describe": "Richten Sie Ihre Steam-ID ein.",
+            "cooldown": "Sie befinden sich in der Abklingzeit. Bitte warten Sie 3 Minuten, bevor Sie diesen Befehl erneut verwenden.",
+            "steamId_setup": "Steam-ID {steamid} wurde eingerichtet für",
+            "steamId_missing": "Sie haben Ihre Steam-ID noch nicht eingerichtet. Verwenden Sie `/stats steamid DEINE_STEAM_ID`, um sie einzurichten."
+        },
+
+        "teams": {
+            "end_button": "Sitzung beenden",
+            "permission_error": "Du hast keine Berechtigung, diesen Befehl zu verwenden.",
+            "description": "Erstellt und verschiebt Benutzer in Teams.",
+            "wrong_channel": "Du kannst den Befehl `/teams` nur im CS2-Voice-Kanal verwenden.",
+            "not_in_channel": "Du musst im 'CS2'-Voice-Kanal sein, um diesen Befehl zu verwenden.",
+            "not_enough": "Es gibt nicht genügend Mitglieder im CS2-Kanal, um Teams zu erstellen.",
+            "creating_teams": "Teams werden erstellt und Mitglieder verschoben...",
+            "embed_title": "Teams erstellt und Spieler verschoben.",
+            "moved_back": "Alle Spieler wurden zurück nach CS2 verschoben."
+        }
     }
 }

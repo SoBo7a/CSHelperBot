@@ -36,5 +36,47 @@
         "topic_instructions": "Welcome to the guide for the CS Butler Bot. This guide explains how to use the bot and its features.",
 
         "topic_commands": "This channel is reserved for commands of the CS Butler and prevents unnecessary use of other text channels."
+    },
+
+
+    "commands": {
+        "maps": {
+            "description": "Selects a random CS2 map.",
+            "choice_describe": "Choose between standard or wingman maps.",
+            "response": "The choosen Map is:"
+        },
+
+        "play": {
+            "description": "Let everyone know you want to play CS2 or manage your subscription.",
+            "choice_describe": "Choose 'subscribe' to subscribe or 'unsubscribe' to unsubscribe from play notifications for CS2",
+            "sub_response": ", you have been subscribed to CS2 play notifications.",
+            "unsub_response": ", you have been unsubscribed from CS2 play notifications.",
+            "cooldown":  ", you are on cooldown. Please wait before using this command again.",
+            "not_subscribed": ", you are not subscribed to /play notifications. Use `/play subscribe` to subscribe.",
+            "inviting": "Sending invites...",
+            "priv_message": " wants to play CS2! Join us in the CS2 voice channel: ",
+            "mentions": " wants to play CS2.\nCan't invite the following users, due to their discord privacy settings: ",
+            "success": "Players have been invited."
+        },
+
+        "stats": {
+            "description": "Manage your CS2 Stats.",
+            "choice_describe": "Setup your Steam ID.",
+            "cooldown": "You are on cooldown, please wait 3 Minutes before using this command again.",
+            "steamId_setup": "Steam ID {steamid} has been set up for",
+            "steamId_missing": "You have not set up your Steam ID yet. Use `/stats steamid YOUR_STEAM_ID` to set it up."
+        },
+
+        "teams": {
+            "end_button": "End Session",
+            "permission_error": "You do not have permission to use this command.",
+            "description": "Creates and moves Users to Teams.",
+            "wrong_channel": "You can only use the `/teams` command in the CS2 voice channel.",
+            "not_in_channel": "You need to be in the 'CS2' voice channel to use this command.",
+            "not_enough": "There are not enough members in the CS2 channel to create teams.",
+            "creating_teams": "Creating teams and moving members...",
+            "embed_title": "Teams created and members moved.",
+            "moved_back": "Moved all members back to CS2."
+        }
     }
 }

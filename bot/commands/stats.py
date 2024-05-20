@@ -1,6 +1,7 @@
 from discord import app_commands, Interaction, Embed
 from bot.utils.stats import get_steam_stats, get_value_by_key, get_best_map, get_best_weapon
 from bot.utils.stats_database import add_user, get_steam_id
+from bot.utils.translations import translate
 import time
 
 # Dictionary to keep track of last used time
@@ -26,8 +27,8 @@ def setup_stats_commands(tree: app_commands.CommandTree, guild):
     Example:
         setup_stats_commands(bot.tree, some_guild)
     """
-    @tree.command(description="Manage your CS2 Stats.")
-    @app_commands.describe(steamid="Setup your Steam ID.")
+    @tree.command(description=translate("commands.stats.description"))
+    @app_commands.describe(steamid=translate("commands.stats.choice_describe"))
     async def stats(interaction: Interaction, steamid: str = None):
         discord_id = str(interaction.user.id)
         current_time = time.time()
@@ -36,14 +37,14 @@ def setup_stats_commands(tree: app_commands.CommandTree, guild):
         if steamid is None and discord_id in user_last_used:
             last_used = user_last_used[discord_id]
             if current_time - last_used < 180:  # 3 minutes = 180 seconds
-                await interaction.response.send_message(f"Please wait 3 Minutes before using this command again.", ephemeral=True)
+                await interaction.response.send_message(translate("commands.stats.cooldown"), ephemeral=True)
                 return
 
         if steamid:
             # If a Steam ID is provided, set it up
             discord_username = str(interaction.user)
             add_user(discord_id, discord_username, steamid)
-            await interaction.response.send_message(f"Steam ID {steamid} has been set up for {interaction.user.mention}.", ephemeral=True)
+            await interaction.response.send_message(translate("commands.stats.steamId_setup").format(steamid=steamid) + interaction.user.mention + ".", ephemeral=True)
         else:
             # If no Steam ID is provided, try to fetch and display the stored Steam ID
             stored_steam_id = get_steam_id(discord_id)
@@ -92,7 +93,7 @@ def setup_stats_commands(tree: app_commands.CommandTree, guild):
                 else:
                     await interaction.response.send_message("Failed to retrieve stats data.")
             else:
-                await interaction.response.send_message("You have not set up your Steam ID yet. Use `/stats steamid YOUR_STEAM_ID` to set it up.")
+                await interaction.response.send_message(translate("commands.stats.steamId_missing"))
         
         # Update the last used time for the user
         if steamid is None:

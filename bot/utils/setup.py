@@ -108,6 +108,7 @@ async def send_tutorial(instructions_channel):
     github_link = "https://github.com/SoBo7a/CSHelperBot"
     contact_support_message = translate("instructions.contact_support").format(mention=mention, github_link=github_link)
     await instructions_channel.send(contact_support_message)
+    await instructions_channel.send("@everyone")
     
 
 async def setup_channels(guild: Guild):    

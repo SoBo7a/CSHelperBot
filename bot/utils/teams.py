@@ -1,6 +1,7 @@
 import random
 from typing import List
 from discord import Guild, Member, VoiceChannel, utils, Embed
+from bot.utils.translations import translate
 
 
 async def get_voice_channels(guild: Guild):
@@ -66,7 +67,7 @@ async def create_and_move_teams(interaction) -> str:
         team1, team2 = create_teams(members)
 
         # Create an embed
-        embed = Embed(title="Teams created and members moved", color=0xFF5733)
+        embed = Embed(title=translate("commands.teams.embed_title"), color=0xFF5733)
 
         # Add fields for each team
         for team_name, team_members in [("Terrorists", team1), ("Anti Terrorists", team2)]:
@@ -98,6 +99,6 @@ async def move_to_lobby(interaction) -> None:
     if cs2_channel and terrorist_channel and anti_terrorist_channel:
         for member in terrorist_channel.members + anti_terrorist_channel.members:
             await member.move_to(cs2_channel)
-        await interaction.followup.send("Moved all members back to CS2.")
+        await interaction.followup.send(translate("commands.teams.moved_back"))
     else:
         await interaction.followup.send("Could not find the necessary channels or you do not have permission to move members.")
