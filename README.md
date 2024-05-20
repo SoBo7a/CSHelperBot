@@ -32,17 +32,23 @@ pip install -r requirements.txt
 TOKEN: YOUR_DISCORD_BOT_TOKEN
 STEAM_API_KEY: YOUR_STEAM_API_KEY
 ```
+- Set your desired Language in the config.json ("de" for German or "en" for English):
+```json
+{
+    "language": "en"
+}
+```
 
-5. Create the databases:
+6. Create the databases:
 - Create a folder called "data" in the root directory of the project.
 - Create "play.db" and "stats.db" in the "data" directory
 
-6. Run the bot:
+7. Run the bot:
 ```bash
 python main.py
 ```
 
-7. Setup Voice channels on your Discord server:
+8. Setup Voice channels on your Discord server:
 - Create the following voice channels, for /teams command to work:
     - CS2
     - Terrorists

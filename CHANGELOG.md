@@ -1,3 +1,6 @@
+## v1.0.2
+- added multi language support (english and german)
+
 ## v1.0.1
 - some code refactoring
 - 3 minute cooldown for /stats

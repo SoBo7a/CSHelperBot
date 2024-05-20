@@ -7,3 +7,5 @@
 - implement more error handling and logging
 
 - get latest cs2 changelog
+
+- finish translations for all messages

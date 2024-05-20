@@ -1,0 +1,40 @@
+{
+    "instructions": {
+        "instructions": {
+            "channel": {
+                "name": "Instructions"
+            }
+        },
+        "headline": "**Guide to Using the CS Butler Bot**",
+        "teams": {
+            "description": "**Feature 1: /teams**\nThe /teams command allows administrators to create teams for a game. The bot will randomly assemble two teams from the players present.\nAll players must be in the CS2 Voice Channel for this. The command must also be entered in the Voice Channel chat.\nTo end the session and move players back to the CS2 chat, the 'End Session' button can be used."
+        },
+        
+        "play": {
+            "description": "**Feature 2: /play**\nThe `/play` command sends a private message in Discord to all subscribers containing an invitation to the CS2 Voice Channel, informing them that someone wants to play CS2.\nTo receive the private messages, Discord privacy settings may need to be adjusted.",
+            "sub_notifications": "\n**Subscribe or Unsubscribe to /play Notifications:**",
+            "sub1": "You can now choose between 'Subscribe' and 'Unsubscribe':",
+            "sub2": "Then you will receive confirmation of the process:",
+            "usage": "The `/play` command can now be used:"
+        },
+
+        "map": {
+            "description": "**Feature 3: /map**\nThe `/map` command suggests a randomly selected CS2 map for standard or wingman games.",
+            "instructions": "For a standard map, simply use the `/map` command alone. To get a wingman map, please follow the steps below:"
+        },
+
+        "stats": {
+            "description": "**Feature 4: /stats**\nThe `/stats` command displays your own Counter-Strike statistics (CSGO + CS2) from Steam.",
+            "usage": "To use the command, you must first save your own SteamID. The SteamID can be found in the link to your profile:",
+            "privacy_settings": "The Steam profile must have certain privacy settings for the bot to access the statistics (statistics are only available a few minutes after changing the settings):",
+            "link_steamID": "Your SteamID must now be linked to the Discord account with the `/stats steamid 1234567890` command. Please insert your SteamID here:",
+            "usage_complete": "The `/stats` command can now be used:"
+        },
+
+        "contact_support": "**For support, error reports, or feature requests, please contact {mention}. For more information and the source code of the bot, visit {github_link}.**",
+
+        "topic_instructions": "Welcome to the guide for the CS Butler Bot. This guide explains how to use the bot and its features.",
+
+        "topic_commands": "This channel is reserved for commands of the CS Butler and prevents unnecessary use of other text channels."
+    }
+}

@@ -1,0 +1,40 @@
+{
+    "instructions": {
+        "instructions": {
+            "channel": {
+                "name": "Anleitung"
+            }
+        },
+        "headline": "**Anleitung zur Nutzung des CS Butler Bots**",
+        "teams": {
+            "description": "**Feature 1: /teams**\nMit dem Befehl `/teams` können Administratoren Teams für ein Spiel erstellen. Der Bot wird zufällig zwei Teams aus den anwesenden Spielern zusammenstellen.\nAlle Spieler müssen sich hierzu im CS2 Voice Channel befinden. Der Befehl muss ebenfalls im Chat des Voice Channels eingegeben werden.\nUm die Session zu beenden und die Spieler wieder in den CS2-Chat zu verschieben, kann der 'End Session'-Button verwendet werden."
+        },
+
+        "play": {
+            "description": "**Feature 2: /play**\nDer Befehl `/play` sendet eine Privatnachricht in Discord an alle Abonnenten, die eine Einladung zum CS2 Voice Channel enthält, um darüber zu informieren, dass jemand CS2 spielen möchte.\nUm die Privatnachrichten zu erhalten, müssen ggf. die Datenschutzeinstellungen in Discord angepasst werden.",
+            "sub_notifications": "\n**Abonnieren oder Deabonnieren der /play-Benachrichtigungen:**",
+            "sub1": "Nun kann zwischen 'Subscribe' und 'Unsubscribe' gewählt werden:",
+            "sub2": "Anschließend erhält man die Bestätigung des Vorgangs:",
+            "usage": "Der `/play`-Befehl kann nun verwendet werden:"
+        },
+
+        "map": {
+            "description": "**Feature 3: /map**\nDer Befehl `/map` schlägt eine zufällig ausgewählte CS2-Map für Standard- oder Wingman-Spiele vor.",
+            "instructions": "Für eine Standard-Map genügt der `/map`-Befehl allein. Um eine Wingman-Map zu erhalten, befolgt bitte die folgenden Schritte:"
+        },
+
+        "stats": {
+            "description": "**Feature 4: /stats**\nDer Befehl `/stats` zeigt die eigene Counter-Strike-Statistik (CSGO + CS2) aus Steam an.",
+            "usage": "Um den Befehl verwenden zu können, muss zuerst die eigene SteamID gespeichert werden. Die SteamID findet sich im Link zu eurem Profil:",
+            "privacy_settings": "Das Steamprofil muss bestimmte Datenschutzeinstellungen haben, damit die Statistiken für den Bot zugänglich sind (Statistiken sind erst einige Minuten nach dem Ändern der Einstellungen abrufbar):",
+            "link_steamID": "Eure SteamID muss nun mit dem Befehl `/stats steamid 1234567890` mit dem Discord-Konto verknüpft werden. Bitte hier die SteamID einfügen:",
+            "usage_complete": "Der `/stats`-Befehl kann nun verwendet werden:"
+        },
+
+        "contact_support": "**Für Support, Fehlermeldungen oder Feature-Anfragen, bitte an {mention} wenden. Für weitere Informationen und den Quellcode des Bots besuche {github_link}.**",
+
+        "topic_instructions": "Willkommen zur Anleitung für den CS Butler Bot. Diese Anleitung erklärt die Nutzung des Bots und seine Funktionen.",
+
+        "topic_commands": "Dieser Kanal ist für Befehle des CS Butler reserviert und verhindert die unnötige Nutzung anderer Textkanäle."
+    }
+}
