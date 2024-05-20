@@ -6,6 +6,4 @@
 
 - implement more error handling and logging
 
-- check where the /name command comes from
-
-- update the bots description in discord
+- get latest cs2 changelog
