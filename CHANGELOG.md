@@ -1,3 +1,6 @@
+## v1.0.3
+- user recieves error message if /stats returns 403 forbidden, due to steam privacy settings
+
 ## v1.0.2
 - added multi language support (english and german)
 

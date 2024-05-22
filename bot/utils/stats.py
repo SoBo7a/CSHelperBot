@@ -17,9 +17,15 @@ def get_steam_stats(steam_id: str) -> dict:
     appid = "730" # 730 for Counter Strike
     url = f"http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?appid={appid}&key={key}&steamid={steam_id}"
     
-    with urllib.request.urlopen(url) as response:
-        data = response.read()
-        return json.loads(data)
+    try:
+        with urllib.request.urlopen(url) as response:
+            data = response.read()
+            return json.loads(data)
+    except urllib.error.HTTPError as e:
+        if e.code == 403:
+            raise e
+        else:
+            return None
     
 
 def get_value_by_key(stats_list, key):

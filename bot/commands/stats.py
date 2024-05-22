@@ -1,11 +1,14 @@
-from discord import app_commands, Interaction, Embed
+from discord import app_commands, Interaction, Embed, utils
 from bot.utils.stats import get_steam_stats, get_value_by_key, get_best_map, get_best_weapon
 from bot.utils.stats_database import add_user, get_steam_id
 from bot.utils.translations import translate
 import time
+import urllib
+
 
 # Dictionary to keep track of last used time
 user_last_used = {}
+
 
 def setup_stats_commands(tree: app_commands.CommandTree, guild):
     """
@@ -49,7 +52,27 @@ def setup_stats_commands(tree: app_commands.CommandTree, guild):
             # If no Steam ID is provided, try to fetch and display the stored Steam ID
             stored_steam_id = get_steam_id(discord_id)
             if stored_steam_id:
-                stats_data = get_steam_stats(stored_steam_id)
+                try:
+                    stats_data = get_steam_stats(stored_steam_id)
+                except urllib.error.HTTPError as e:
+                    if e.code == 403:
+                        # Fetch the category by name
+                        category = utils.get(interaction.guild.categories, name="CS2-Butler-Bot")
+                        if category:
+                            # Fetch the instructions channel within the category
+                            instructions_channel = utils.get(category.text_channels, name=translate("instructions.instructions.channel.name"))
+                            if instructions_channel:
+                                channel_mention = instructions_channel.mention
+                                await interaction.response.send_message(translate("commands.stats.privacy_settings_error").format(channel=channel_mention), ephemeral=True)
+                            else:
+                                await interaction.response.send_message("Instructions channel not found in the expected category. Please contact an admin.", ephemeral=True)
+                        else:
+                            await interaction.response.send_message("Category 'CS2-Butler-Bot' not found. Please contact an admin.", ephemeral=True)
+                        return
+                    else:
+                        await interaction.response.send_message(f"Failed to retrieve stats data. Error: {e}", ephemeral=True)
+                        return
+
                 if stats_data is not None:
                     if 'playerstats' in stats_data and 'stats' in stats_data['playerstats']:
                         player_stats = stats_data['playerstats']['stats']

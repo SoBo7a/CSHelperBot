@@ -2,7 +2,7 @@
     "instructions": {
         "instructions": {
             "channel": {
-                "name": "Instructions"
+                "name": "instructions"
             }
         },
         "headline": "**Guide to Using the CS Butler Bot**",
@@ -64,7 +64,8 @@
             "choice_describe": "Setup your Steam ID.",
             "cooldown": "You are on cooldown, please wait 3 Minutes before using this command again.",
             "steamId_setup": "Steam ID {steamid} has been set up for",
-            "steamId_missing": "You have not set up your Steam ID yet. Use `/stats steamid YOUR_STEAM_ID` to set it up."
+            "steamId_missing": "You have not set up your Steam ID yet. Use `/stats steamid YOUR_STEAM_ID` to set it up.",
+            "privacy_settings_error": "Your Steam privacy settings prevent access to the statistics. Please check the instructions in the {channel} for assistance with changing the settings."
         },
 
         "teams": {

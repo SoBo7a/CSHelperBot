@@ -2,7 +2,7 @@
     "instructions": {
         "instructions": {
             "channel": {
-                "name": "Anleitung"
+                "name": "anleitung"
             }
         },
         "headline": "**Anleitung zur Nutzung des CS Butler Bots**",
@@ -60,11 +60,12 @@
         },
 
         "stats": {
-            "description": "Verwalten Sie Ihre CS2-Statistiken.",
-            "choice_describe": "Richten Sie Ihre Steam-ID ein.",
-            "cooldown": "Sie befinden sich in der Abklingzeit. Bitte warten Sie 3 Minuten, bevor Sie diesen Befehl erneut verwenden.",
+            "description": "Zeige Deine CS2-Statistiken.",
+            "choice_describe": "Richte Deine Steam-ID ein.",
+            "cooldown": "Du befindest dich in der Abklingzeit. Bitte warte 3 Minuten, bevor Du diesen Befehl erneut verwendest.",
             "steamId_setup": "Steam-ID {steamid} wurde eingerichtet für",
-            "steamId_missing": "Sie haben Ihre Steam-ID noch nicht eingerichtet. Verwenden Sie `/stats steamid DEINE_STEAM_ID`, um sie einzurichten."
+            "steamId_missing": "Du hast Deine Steam-ID noch nicht eingerichtet. Verwende `/stats steamid DEINE_STEAM_ID`, um sie einzurichten.",
+            "privacy_settings_error": "Deine Steam-Privatsphäre-Einstellungen verhindern den Zugriff auf die Statistiken. Siehe {channel} für Unterstützung bei der Änderung der Einstellungen."
         },
 
         "teams": {
