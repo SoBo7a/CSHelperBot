@@ -6,7 +6,7 @@ Discord CS Helper Bot is a Discord bot designed to manage and facilitate CS2 pla
 - Team Management: Randomly move users into teams within designated voice channels.
 - Stats Tracking: Retrieve CS2 player statistics from Steam.
 - Random Map: Get a random Map out of a list of all CS2 Maps. You can get either Standard or Wingman Maps.
-- Creates a new category related to the bot, including:
+- Creates a new category in the channel dedicated to the bot, which includes:
     - A tutorial channel to provide guidance on utilizing the bot.
     - A commands channel dedicated to using bot commands without cluttering other channels.
     - A cs2-patchnotes channel designed to display all past and forthcoming patch notes related to CS2.
