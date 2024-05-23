@@ -7,6 +7,7 @@
 
 [MISC]
 - code refactoring
+- implemented basic logging
 
 ## v1.0.2
 - added multi language support (english and german)

@@ -3,7 +3,7 @@ from bot.commands import setup_commands
 from bot.utils.stats_database import init_db_stats
 from bot.utils.play_database import init_db_play
 from bot.utils.setup import setup_channels
-import logging
+from bot.utils.logging import get_cs_butler_logger
 
 
 def setup_bot() -> Client:
@@ -19,7 +19,8 @@ def setup_bot() -> Client:
 
     @client.event
     async def on_ready():
-        print(f'{client.user} is now running!')
+        logger = get_cs_butler_logger(log_level="INFO")
+        logger.info(f'{client.user} is now running!')
         
         guild = client.get_guild(MY_GUILD.id)
         await setup_channels(guild)
