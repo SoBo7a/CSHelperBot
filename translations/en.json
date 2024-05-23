@@ -5,7 +5,7 @@
                 "name": "instructions"
             }
         },
-        "headline": "**Guide to Using the CS Butler Bot**",
+        "headline": "# Guide to Using the CS Butler Bot",
         "teams": {
             "description": "**Feature 1: /teams**\nThe /teams command allows administrators to create teams for a game. The bot will randomly assemble two teams from the players present.\nAll players must be in the CS2 Voice Channel for this. The command must also be entered in the Voice Channel chat.\nTo end the session and move players back to the CS2 chat, the 'End Session' button can be used."
         },

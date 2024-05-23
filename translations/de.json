@@ -5,7 +5,7 @@
                 "name": "anleitung"
             }
         },
-        "headline": "**Anleitung zur Nutzung des CS Butler Bots**",
+        "headline": "# Anleitung zur Nutzung des CS Butler Bots",
         "teams": {
             "description": "**Feature 1: /teams**\nMit dem Befehl `/teams` können Administratoren Teams für ein Spiel erstellen. Der Bot wird zufällig zwei Teams aus den anwesenden Spielern zusammenstellen.\nAlle Spieler müssen sich hierzu im CS2 Voice Channel befinden. Der Befehl muss ebenfalls im Chat des Voice Channels eingegeben werden.\nUm die Session zu beenden und die Spieler wieder in den CS2-Chat zu verschieben, kann der 'End Session'-Button verwendet werden."
         },

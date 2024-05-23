@@ -1,5 +1,12 @@
 ## v1.0.3
-- user recieves error message if /stats returns 403 forbidden, due to steam privacy settings
+[FEATURES]
+- Implemented a new channel named "cs2-patchnotes" within the bot's category to display recent and upcoming CS2 patch note
+
+[FIXES]
+- Resolved issue where users receive no error messages if /stats returns a 403 Forbidden status, typically due to Steam privacy settings.
+
+[MISC]
+- code refactoring
 
 ## v1.0.2
 - added multi language support (english and german)

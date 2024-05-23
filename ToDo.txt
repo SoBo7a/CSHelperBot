@@ -1,9 +1,9 @@
-- Add voice channels using /config (no hardcoding) to /teams
+- !!!merge all databases into one!!!
 
 - add more stats
-
+- add flag to show stats for other steamIds than yours (eg.: /stats user <users_steamID>)
 - improve best weapon and map by calculating eg. win rates for each map
 
 - implement more error handling and logging
 
-- get latest cs2 changelog
+- Add voice channels dynamically, using /config (no hardcoding) to /teams

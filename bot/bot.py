@@ -3,6 +3,7 @@ from bot.commands import setup_commands
 from bot.utils.stats_database import init_db_stats
 from bot.utils.play_database import init_db_play
 from bot.utils.setup import setup_channels
+import logging
 
 
 def setup_bot() -> Client:
