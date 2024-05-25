@@ -33,8 +33,9 @@ pip install -r requirements.txt
 - Create a .env file in the root directory of the project.
 - Add your bot token and other necessary configurations:
 ```
-TOKEN: YOUR_DISCORD_BOT_TOKEN
-STEAM_API_KEY: YOUR_STEAM_API_KEY
+TOKEN = YOUR_DISCORD_BOT_TOKEN
+STEAM_API_KEY = YOUR_STEAM_API_KEY
+GUILD_ID = YOUR_GUILD_ID
 ```
 - Set your desired Language in the config.json ("de" for German or "en" for English):
 ```json

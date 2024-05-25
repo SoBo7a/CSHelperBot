@@ -1,4 +1,5 @@
 from discord import Intents, Client, app_commands, Object
+import config.settings as settings
 from bot.commands import setup_commands
 from bot.utils.stats_database import init_db_stats
 from bot.utils.play_database import init_db_play
@@ -15,7 +16,7 @@ def setup_bot() -> Client:
     client = Client(intents=intents)
     tree = app_commands.CommandTree(client)
     # ToDo: make it available to multiple guilds / assign id dynamically
-    MY_GUILD = Object(id=885183686646042724)
+    MY_GUILD = Object(id=settings.GUILD_ID)
 
     @client.event
     async def on_ready():

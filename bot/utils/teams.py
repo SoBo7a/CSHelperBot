@@ -4,6 +4,8 @@ from discord import Guild, Member, VoiceChannel, utils, Embed
 from bot.utils.translations import translate
 
 
+# ToDo: Improve performance/speed when moving members between voice channels, maybe using threads?!
+
 async def get_voice_channels(guild: Guild):
     """
     Retrieve all voice channels in a guild.
