@@ -62,26 +62,54 @@ def get_value_by_key(stats_list, key):
 
 def get_best_map(stats_list):
     """
-    Finds the best map based on the total number of wins in the statistics data.
+    Finds the best map based on the win rate in the statistics data,
+    considering only maps with rounds played at or below 70% of the average rounds played.
 
     Args:
         stats_list (list): A list of dictionaries containing statistics data.
 
     Returns:
-        tuple: A tuple containing the name of the best map and the number of wins on that map.
+        tuple: A tuple containing the name of the best map and the win rate on that map.
     """
+    map_rounds = {}
+    total_rounds = 0
+    map_count = 0
+    
+    # Calculate total rounds and map count for average rounds calculation
+    for stats_dict in stats_list:
+        rounds_key = stats_dict.get('name')
+        if rounds_key and rounds_key.startswith('total_rounds_map_'):
+            map_name = rounds_key.split('_')[-2] + "_" + rounds_key.split('_')[-1]
+            rounds = stats_dict.get('value')
+            map_rounds[map_name] = rounds
+            total_rounds += rounds
+            map_count += 1
+
+    # Calculate average rounds played
+    if map_count == 0:
+        return None, 0
+    average_rounds = total_rounds / map_count
+    threshold_rounds = average_rounds * 0.7
+    
     best_map = None
-    highest_wins = -1
+    highest_win_rate = -1
     
     for stats_dict in stats_list:
-        name = stats_dict.get('name')
-        if name and name.startswith('total_wins_map_'):
-            wins = stats_dict.get('value')
-            if wins > highest_wins:
-                highest_wins = wins
-                best_map = name.split('_')[-2] + "_" + name.split('_')[-1]
-    
-    return best_map, highest_wins
+        wins_key = stats_dict.get('name')
+        if wins_key and wins_key.startswith('total_wins_map_'):
+            map_name = wins_key.split('_')[-2] + "_" + wins_key.split('_')[-1]
+            rounds = map_rounds.get(map_name, 0)
+            if rounds >= threshold_rounds:
+                rounds_key = f"total_rounds_map_{map_name}"
+                wins = stats_dict.get('value')
+                rounds = next((sd.get('value') for sd in stats_list if sd.get('name') == rounds_key), 0)
+                if rounds > 0:
+                    win_rate = wins / rounds
+                    if win_rate > highest_win_rate:
+                        highest_win_rate = win_rate
+                        best_map = map_name
+
+    return best_map, highest_win_rate
 
 
 def get_best_weapon(stats_list):

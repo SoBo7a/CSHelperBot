@@ -1,7 +1,7 @@
 - !!!merge all databases into one!!!
 
 - add more stats
-- improve best weapon and map by calculating eg. win rates for each map
+- improve best weapon by calculating kill rates
 - update instructions with user option
 
 - implement more error handling and logging
