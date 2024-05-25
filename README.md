@@ -97,7 +97,7 @@ python main.py
 - Description: Manage your CS2 stats by setting up your Steam ID or retrieving and displaying your CS2 statistics.
 - Usage:
 ```
-/stats [steamid]
+/stats [setup_steamid] or [user]
 ```
 - Features:
     - Setup Steam ID: Use /stats steamid YOUR_STEAM_ID to set up your Steam ID.
@@ -113,9 +113,9 @@ python main.py
     - Total Matches Played: Total number of matches played.
     - Win Rate: Win rate percentage based on total matches won and played.
 - Example:
-    - /stats steamid 1234567890: Sets up the Steam ID 1234567890 for the user.
+    - /stats setup_steamid 1234567890: Sets up the Steam ID 1234567890 for the user.
     - /stats: Retrieves and displays the stored stats for the user.
-
+    - /stats user 1234567890: recieves the stats for the given Steam ID.
 ## License
 This project is licensed under the MIT License. See the [LICENSE](https://github.com/SoBo7a/CSHelperBot/blob/main/LICENSE.md) file for more details.
 

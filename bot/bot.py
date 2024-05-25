@@ -25,8 +25,11 @@ def setup_bot() -> Client:
         guild = client.get_guild(MY_GUILD.id)
         await setup_channels(guild)
 
-        # tree.copy_global_to(guild=MY_GUILD) # Use this for development/testing of commands, since they get copied over immediatly this way
+        tree.copy_global_to(guild=MY_GUILD) # Use this for development/testing of commands, since they get copied over immediatly this way
+        # tree.clear_commands(guild=MY_GUILD)
         await tree.sync(guild=MY_GUILD)
+        # test = await tree.fetch_commands(guild=MY_GUILD)
+        # print(test)
 
     init_db_stats()
     init_db_play()

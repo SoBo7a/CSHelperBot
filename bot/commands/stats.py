@@ -1,5 +1,5 @@
 from discord import app_commands, Interaction, Embed, utils
-from bot.utils.stats import get_steam_stats, get_value_by_key, get_best_map, get_best_weapon
+from bot.utils.stats import get_steam_user, get_steam_stats, get_value_by_key, get_best_map, get_best_weapon
 from bot.utils.stats_database import add_user, get_steam_id
 from bot.utils.translations import translate
 import time
@@ -24,36 +24,37 @@ def setup_stats_commands(tree: app_commands.CommandTree, guild):
 
     Command Description:
     - /stats: Manage CS2 stats.
-      - steamid: Provide your Steam ID to set it up for retrieving stats.
-        - If provided, the command will save the Steam ID for the user.
+      - setup_steamid: Provide your Steam ID to set it up for retrieving stats.
+      - user: Provide a Steam ID to retrieve stats for a specific user without storing it.
 
     Example:
         setup_stats_commands(bot.tree, some_guild)
     """
     @tree.command(description=translate("commands.stats.description"))
-    @app_commands.describe(steamid=translate("commands.stats.choice_describe"))
-    async def stats(interaction: Interaction, steamid: str = None):
+    @app_commands.describe(setup_steamid=translate("commands.stats.choice_describe"), user=translate("commands.stats.choice_user_describe"))
+    async def stats(interaction: Interaction, setup_steamid: str = None, user: str = None):
         discord_id = str(interaction.user.id)
         current_time = time.time()
 
         # Check if user is rate limited
-        if steamid is None and discord_id in user_last_used:
+        if setup_steamid is None and discord_id in user_last_used:
             last_used = user_last_used[discord_id]
             if current_time - last_used < 180:  # 3 minutes = 180 seconds
                 await interaction.response.send_message(translate("commands.stats.cooldown"), ephemeral=True)
                 return
 
-        if steamid:
+        if setup_steamid:
             # If a Steam ID is provided, set it up
             discord_username = str(interaction.user)
-            add_user(discord_id, discord_username, steamid)
-            await interaction.response.send_message(translate("commands.stats.steamId_setup").format(steamid=steamid) + interaction.user.mention + ".", ephemeral=True)
+            add_user(discord_id, discord_username, setup_steamid)
+            await interaction.response.send_message(translate("commands.stats.steamId_setup").format(steamid=setup_steamid) + interaction.user.mention + ".", ephemeral=True)
         else:
-            # If no Steam ID is provided, try to fetch and display the stored Steam ID
-            stored_steam_id = get_steam_id(discord_id)
-            if stored_steam_id:
+            # Determine which Steam ID to use for stats retrieval
+            steam_id_to_check = user if user else get_steam_id(discord_id)
+            
+            if steam_id_to_check:
                 try:
-                    stats_data = get_steam_stats(stored_steam_id)
+                    stats_data = get_steam_stats(steam_id_to_check)
                 except urllib.error.HTTPError as e:
                     if e.code == 403:
                         # Fetch the category by name
@@ -76,6 +77,11 @@ def setup_stats_commands(tree: app_commands.CommandTree, guild):
                 if stats_data is not None:
                     if 'playerstats' in stats_data and 'stats' in stats_data['playerstats']:
                         player_stats = stats_data['playerstats']['stats']
+    
+                        user_data = get_steam_user(steam_id_to_check)['response']['players'][0]
+                        personaname = user_data['personaname']
+                        profileurl = user_data['profileurl']
+                        avatar_url = user_data['avatar']
                         
                         # Extracting specific values
                         total_kills = get_value_by_key(player_stats, 'total_kills')
@@ -97,8 +103,9 @@ def setup_stats_commands(tree: app_commands.CommandTree, guild):
                         # Finding the best weapon
                         best_weapon, highest_kills = get_best_weapon(player_stats)
 
-                        # Create an embed
-                        embed = Embed(title="CS2 Stats", description=interaction.user.mention)
+                        # Create an embed                        
+                        embed = Embed(title="CS2 Stats", description=f"for Player:\n**[{personaname}]({profileurl})**")
+                        embed.set_thumbnail(url=avatar_url)
                         embed.add_field(name="Total Time Played", value=total_time_played, inline=True)
                         embed.add_field(name="Best Map", value=best_map, inline=True)
                         embed.add_field(name="Best Weapon", value=best_weapon, inline=True)
@@ -119,5 +126,5 @@ def setup_stats_commands(tree: app_commands.CommandTree, guild):
                 await interaction.response.send_message(translate("commands.stats.steamId_missing"))
         
         # Update the last used time for the user
-        if steamid is None:
+        if setup_steamid is None and user is None:
             user_last_used[discord_id] = current_time

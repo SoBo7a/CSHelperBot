@@ -62,10 +62,11 @@
         "stats": {
             "description": "Zeige Deine CS2-Statistiken.",
             "choice_describe": "Richte Deine Steam-ID ein.",
+            "choice_user_describe": "Zeige Stats für eine beliebige SteamID.",
             "cooldown": "Du befindest dich in der Abklingzeit. Bitte warte 3 Minuten, bevor Du diesen Befehl erneut verwendest.",
             "steamId_setup": "Steam-ID {steamid} wurde eingerichtet für",
             "steamId_missing": "Du hast Deine Steam-ID noch nicht eingerichtet. Verwende `/stats steamid DEINE_STEAM_ID`, um sie einzurichten.",
-            "privacy_settings_error": "Deine Steam-Privatsphäre-Einstellungen verhindern den Zugriff auf die Statistiken. Siehe {channel} für Unterstützung bei der Änderung der Einstellungen."
+            "privacy_settings_error": "Die Steam-Privatsphäre-Einstellungen verhindern den Zugriff auf die Statistiken. Siehe {channel} für Unterstützung bei der Änderung der Einstellungen."
         },
 
         "teams": {

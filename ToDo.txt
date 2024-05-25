@@ -1,9 +1,15 @@
 - !!!merge all databases into one!!!
 
 - add more stats
-- add flag to show stats for other steamIds than yours (eg.: /stats user <users_steamID>)
 - improve best weapon and map by calculating eg. win rates for each map
+- update instructions with user option
 
 - implement more error handling and logging
 
 - Add voice channels dynamically, using /config (no hardcoding) to /teams
+
+- add more values/settings to config.json instead of hardcoding
+
+- implement command /vac-check that takes a steamid and stores it to a db including the discord user that used the command
+    - the bot then checks the steamids from that db in intervals if they recieved a vac ban
+    - if any steam id from the db recieved a vac ban it should create a message in a new vac-checker channel that mentions the user who created the entry in the db that the player have been banned

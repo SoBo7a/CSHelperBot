@@ -3,6 +3,21 @@ import json
 import config.settings as settings
 
 
+def get_steam_user(steam_id: str) -> dict:
+    key = settings.STEAM_API_KEY
+    url = f"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?format=json&key={key}&steamids={steam_id}"
+        
+    try:
+        with urllib.request.urlopen(url) as response:
+            data = response.read()
+            return json.loads(data)
+    except urllib.error.HTTPError as e:
+        if e.code == 403:
+            raise e
+        else:
+            return None
+    
+
 def get_steam_stats(steam_id: str) -> dict:
     """
     Retrieves Steam statistics for a given Steam ID using the Steam API.

@@ -1,3 +1,8 @@
+## v1.0.4
+[IMPROVEMENTS]
+- /stats now shows the steam username and as a link to the profile instead of the discord mention
+- /stats now has an "user" option that allows to give any steamID and check the stats for it
+
 ## v1.0.3
 [FEATURES]
 - Implemented a new channel named "cs2-patchnotes" within the bot's category to display recent and upcoming CS2 patch note
