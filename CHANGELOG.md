@@ -2,7 +2,7 @@
 [FIXES]
 - Fixed issue with vac-watcher, where false positives were generated
 - Updated Readme
-- Updated some translations
+- Updated translation for vac-watcher channel description
 
 ## v1.0.6
 [FEATURES]
