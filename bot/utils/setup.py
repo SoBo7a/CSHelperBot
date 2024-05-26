@@ -77,7 +77,7 @@ async def setup_channels(guild: Guild):
     # Create the VAC-Watcher channel if it doesn't exist
     if not any('vac-watcher' == channel.name for channel in channels_in_category):
         vacwatcher_channel = await guild.create_text_channel('vac-watcher', category=category)
-        await vacwatcher_channel.edit(topic="Here you will see all succesfully VAC banned players from the watchlist.")
+        await vacwatcher_channel.edit(topic=translate("instructions.topic_vac_watcher"))
 
         # Set channel permissions for Patchnotes channel
         await vacwatcher_channel.set_permissions(everyone_role, read_messages=True, send_messages=False)

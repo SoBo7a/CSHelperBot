@@ -2,6 +2,7 @@
 [FIXES]
 - Fixed issue with vac-watcher, where false positives were generated
 - Updated Readme
+- Updated some translations
 
 ## v1.0.6
 [FEATURES]

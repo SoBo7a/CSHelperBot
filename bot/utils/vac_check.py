@@ -94,7 +94,7 @@ async def check_for_bans(channel):
     # Fetch all entries from the database
     db_entries = get_vac_checks()
     if not db_entries:
-        print("No Steam IDs found in the database to check.") # For testing only!!!
+        # print("No Steam IDs found in the database to check.") # For testing only!!!
         return
     
     # Extract all Steam IDs from the entries

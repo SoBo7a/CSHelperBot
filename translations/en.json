@@ -42,7 +42,9 @@
 
         "topic_instructions": "Welcome to the guide for the CS Butler Bot. This guide explains how to use the bot and its features.",
 
-        "topic_commands": "This channel is reserved for commands of the CS Butler and prevents unnecessary use of other text channels."
+        "topic_commands": "This channel is reserved for commands of the CS Butler and prevents unnecessary use of other text channels.",
+
+        "topic_vac_watcher": "This channel displays all players from the watchlist who have received a successful VAC ban."
     },
 
 
