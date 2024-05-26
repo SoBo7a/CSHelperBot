@@ -5,6 +5,7 @@ from bot.commands.teams import setup_team_commands
 from bot.commands.maps import setup_map_commands
 from bot.commands.stats import setup_stats_commands
 from bot.commands.play import setup_play_commands
+from bot.commands.vac_check import setup_vac_check_commands
 
 def setup_commands(tree: app_commands.CommandTree, guild):
     """
@@ -24,3 +25,4 @@ def setup_commands(tree: app_commands.CommandTree, guild):
     setup_map_commands(tree, guild)
     setup_stats_commands(tree, guild)
     setup_play_commands(tree, guild)
+    setup_vac_check_commands(tree, guild)

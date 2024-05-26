@@ -79,6 +79,16 @@
             "creating_teams": "Teams werden erstellt und Mitglieder verschoben...",
             "embed_title": "Teams erstellt und Spieler verschoben.",
             "moved_back": "Alle Spieler wurden zurück nach CS2 verschoben."
+        },
+
+        "vac_check": {
+            "description": "Überprüfe den VAC-Ban-Status für eine bestimmte Steam-ID.",
+            "describe": "Gib die Steam-ID ein, die du auf VAC-Bans überprüfen möchtest.",
+            "steamid_exists": "Diese Steam-ID wird bereits auf VAC-Bans überwacht. Du erhältst Benachrichtigungen, falls der Spieler gebannt wird.",
+            "invalid_input": "Ungültige Eingabe. Bitte gib eine gültige Steam-ID ein. Du kannst eine Steam-ID von einer benutzerdefinierten URL erhalten, indem du {url} besuchst.",
+            "watch_status": "Diese Steam-ID wird nun auf VAC-Bans überwacht. Du erhältst Benachrichtigungen, falls der Spieler innerhalb der nächsten 360 Tage VAC-gebanned wird.",
+            "no_information": "Keine VAC-Informationen für diese Steam-ID gefunden.",
+            "no_ban_information": "Keine Ban-Informationen für die Steam-ID gefunden: {steam_id}. Entferne aus der Datenbank..."
         }
     }
 }

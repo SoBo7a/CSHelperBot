@@ -1,3 +1,10 @@
+## v1.0.6
+[FEATURES]
+- Added the /vac_check command, allowing users to monitor SteamIDs for 360 days and receive notifications if any of the monitored SteamIDs are VAC banned.
+
+[IMPROVEMENTS]
+- code refactoring
+
 ## v1.0.5
 [IMPROVEMENTS]
 - /stats: best map in stats is now based on win-rates and average rounds on each map

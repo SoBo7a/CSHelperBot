@@ -117,6 +117,21 @@ python main.py
     - /stats setup_steamid 1234567890: Sets up the Steam ID 1234567890 for the user.
     - /stats: Retrieves and displays the stored stats for the user.
     - /stats user 1234567890: recieves the stats for the given Steam ID.
+
+### /vac_check
+- Description: Check VAC ban status for a given Steam ID and monitor it for 360 days.
+- Usage:
+```
+/vac_check [SteamID]
+```
+- Parameters:
+    - SteamID: The Steam ID to check for VAC bans and monitor.
+- Features:
+    - Monitors the specified Steam ID for 360 days.
+    - Notifies users if the monitored Steam ID gets VAC banned.
+- Example:
+    - /vac_check 1234567890: Checks the VAC ban status for the Steam ID 1234567890 and monitors it for 360 days.
+
 ## License
 This project is licensed under the MIT License. See the [LICENSE](https://github.com/SoBo7a/CSHelperBot/blob/main/LICENSE.md) file for more details.
 

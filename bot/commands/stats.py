@@ -1,6 +1,6 @@
 from discord import app_commands, Interaction, Embed, utils
 from bot.utils.stats import get_steam_user, get_steam_stats, get_value_by_key, get_best_map, get_best_weapon
-from bot.utils.stats_database import add_user, get_steam_id
+from bot.utils.database.stats_database import add_user, get_steam_id
 from bot.utils.translations import translate
 import time
 import urllib

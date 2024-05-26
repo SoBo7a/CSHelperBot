@@ -2,6 +2,7 @@ from discord import Guild, utils
 from .translations import translate
 from .tutorial import send_tutorial
 from .patchnotes import post_initial_patchnotes, start_patchnote_check
+from .vac_check import start_periodic_check_for_bans
         
         
 async def setup_channels(guild: Guild):    
@@ -71,3 +72,19 @@ async def setup_channels(guild: Guild):
     # Start checking for new patchnotes
     channel = next((channel for channel in channels_in_category if channel.name == 'cs2-patchnotes'), None)
     await start_patchnote_check(channel)
+    
+    
+    # Create the VAC-Watcher channel if it doesn't exist
+    if not any('vac-watcher' == channel.name for channel in channels_in_category):
+        vacwatcher_channel = await guild.create_text_channel('vac-watcher', category=category)
+        await vacwatcher_channel.edit(topic="Here you will see all succesfully VAC banned players from the watchlist.")
+
+        # Set channel permissions for Patchnotes channel
+        await vacwatcher_channel.set_permissions(everyone_role, read_messages=True, send_messages=False)
+        
+        if admin_role:
+            await vacwatcher_channel.set_permissions(admin_role, send_messages=True)
+    
+    # Start checking for new vac bans
+    vac_watch_channel = next((channel for channel in channels_in_category if channel.name == 'vac-watcher'), None)
+    await start_periodic_check_for_bans(vac_watch_channel)

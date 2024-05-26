@@ -1,5 +1,5 @@
 from discord import app_commands, Interaction, Forbidden, utils, VoiceChannel, Guild
-from bot.utils.play_database import add_subscription, get_subscriptions, delete_subscriptions
+from bot.utils.database.play_database import add_subscription, get_subscriptions, delete_subscriptions
 from bot.utils.translations import translate
 from time import time
 

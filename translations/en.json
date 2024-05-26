@@ -60,7 +60,7 @@
         },
 
         "stats": {
-            "description": "Manage your CS2 Stats.",
+            "description": "Show CS2 Stats.",
             "choice_describe": "Setup your Steam ID.",
             "choice_user_describe": "Show Stats for any given SteamID.",
             "cooldown": "You are on cooldown, please wait 3 Minutes before using this command again.",
@@ -79,6 +79,16 @@
             "creating_teams": "Creating teams and moving members...",
             "embed_title": "Teams created and members moved.",
             "moved_back": "Moved all members back to CS2."
+        },
+
+        "vac_check": {
+            "description": "Check VAC ban status for a given Steam ID.",
+            "describe": "Enter the Steam ID you want to check for VAC bans.",
+            "steamid_exists": "This Steam ID is already being monitored for VAC bans. You will receive notifications if the player gets banned.",
+            "invalid_input": "Invalid input. Please enter a valid Steam ID. You can find a Steam ID from a custom URL by visiting [SteamRep](https://steamrep.com/).",
+            "watch_status": "This Steam ID is now being monitored for VAC bans. You will receive notifications if the player gets VAC banned within the next 360 days.",
+            "no_information": "No VAC information found for this Steam ID.",
+            "no_ban_information": "No ban information found for Steam ID: {steam_id}. Removing from the database..."
         }
     }
 }

@@ -1,7 +1,7 @@
 import sqlite3
 import os
 
-DATABASE_PATH = os.path.join(os.path.dirname(__file__), '../../data/stats.db')
+DATABASE_PATH = os.path.join(os.path.dirname(__file__), '../../../data/stats.db')
 
 
 def init_db_stats():
