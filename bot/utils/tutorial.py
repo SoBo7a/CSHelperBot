@@ -109,6 +109,25 @@ async def send_tutorial(instructions_channel):
     with open(stats_image6, 'rb') as f:
         picture = File(f, spoiler=True)
         await stats_thread.send(file=picture)
+    await stats_thread.send(translate("instructions.stats.get_user"))
+    stats_image7 = os.path.join(base_dir, 'assets', 'img', 'Tutorial_stats_user.png')
+    with open(stats_image7, 'rb') as f:
+        picture = File(f, spoiler=True)
+        await stats_thread.send(file=picture)
+        
+    # Feature: /vac_check
+    vac_message = await instructions_channel.send(translate('instructions.vac_check.description'))
+    vac_thread = await vac_message.create_thread(name="Feature 5: /vac_check")
+    await vac_thread.send(translate('instructions.vac_check.instructions'))
+    vac_image1 = os.path.join(base_dir, 'assets', 'img', 'Tutorial_vac_check1.png')
+    with open(vac_image1, 'rb') as f:
+        picture = File(f, spoiler=True)
+        await vac_thread.send(file=picture)
+    vac_image2 = os.path.join(base_dir, 'assets', 'img', 'Tutorial_vac_check2.png')
+    with open(vac_image2, 'rb') as f:
+        picture = File(f, spoiler=True)
+        await vac_thread.send(file=picture)
+    await vac_thread.send(translate('instructions.vac_check.conclusion'))
         
     await instructions_channel.send(empty_line)
 

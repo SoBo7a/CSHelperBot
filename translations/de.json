@@ -28,7 +28,14 @@
             "usage": "Um den Befehl verwenden zu können, muss zuerst die eigene SteamID gespeichert werden. Die SteamID findet sich im Link zu eurem Profil:",
             "privacy_settings": "Das Steamprofil muss bestimmte Datenschutzeinstellungen haben, damit die Statistiken für den Bot zugänglich sind (Statistiken sind erst einige Minuten nach dem Ändern der Einstellungen abrufbar):",
             "link_steamID": "Eure SteamID muss nun mit dem Befehl `/stats steamid 1234567890` mit dem Discord-Konto verknüpft werden. Bitte hier die SteamID einfügen:",
-            "usage_complete": "Der `/stats`-Befehl kann nun verwendet werden:"
+            "usage_complete": "Der `/stats`-Befehl kann nun verwendet werden:",
+            "get_user": "Du kannst auch die Statistiken für eine beliebige Steam-ID anzeigen, indem Du `/stats user <ANY_STEAM_ID>` verwendest."
+        },
+
+        "vac_check": {
+            "description": "**Feature 5: /vac_check**\nDer Befehl `/vac_check` überprüft den VAC-Bannstatus für eine angegebene Steam-ID und überwacht sie für 360 Tage.",
+            "instructions": "`/vac_check 1234567890`: Überprüft den VAC-Bannstatus für die Steam-ID 1234567890.",
+            "conclusion": "Nach erfolgreicher Eingabe wird eine Übersicht mit den aktuellen VAC-Banninformationen der angegebenen Steam-ID angezeigt. Sollte die überwachte Steam-ID innerhalb der nächsten 360 Tage einen VAC-Bann erhalten, wird der Bot eine Benachrichtigung im 'vac-watcher'-Kanal veröffentlichen, um darüber zu informieren."
         },
 
         "contact_support": "**Für Support, Fehlermeldungen oder Feature-Anfragen, bitte an {mention} wenden. Für weitere Informationen und den Quellcode des Bots besuche {github_link}.**",
@@ -86,7 +93,7 @@
             "describe": "Gib die Steam-ID ein, die du auf VAC-Bans überprüfen möchtest.",
             "steamid_exists": "Diese Steam-ID wird bereits auf VAC-Bans überwacht. Du erhältst Benachrichtigungen, falls der Spieler gebannt wird.",
             "invalid_input": "Ungültige Eingabe. Bitte gib eine gültige Steam-ID ein. Du kannst eine Steam-ID von einer benutzerdefinierten URL erhalten, indem du {url} besuchst.",
-            "watch_status": "Diese Steam-ID wird nun auf VAC-Bans überwacht. Du erhältst Benachrichtigungen, falls der Spieler innerhalb der nächsten 360 Tage VAC-gebanned wird.",
+            "watch_status": "Diese Steam-ID wird nun auf VAC-Bans überwacht. Du erhältst Benachrichtigungen, falls der Spieler innerhalb der nächsten 360 Tage VAC-banned wird.",
             "no_information": "Keine VAC-Informationen für diese Steam-ID gefunden.",
             "no_ban_information": "Keine Ban-Informationen für die Steam-ID gefunden: {steam_id}. Entferne aus der Datenbank..."
         }

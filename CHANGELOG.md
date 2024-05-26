@@ -4,6 +4,7 @@
 
 [IMPROVEMENTS]
 - code refactoring
+- updated instructions channel with the latest changes
 
 ## v1.0.5
 [IMPROVEMENTS]

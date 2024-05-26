@@ -2,7 +2,6 @@
 
 - add more stats
 - improve best weapon by calculating kill rates
-- update instructions with user option
 - !! less timeout, 5 commands are okay then 5 minutes timout!!!
 
 - implement more error handling and logging
@@ -10,5 +9,3 @@
 - Add voice channels dynamically, using /config (no hardcoding) to /teams
 
 - add more values/settings to config.json instead of hardcoding
-
-- add vac check to instructions

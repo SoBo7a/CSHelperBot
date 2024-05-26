@@ -28,7 +28,14 @@
             "usage": "To use the command, you must first save your own SteamID. The SteamID can be found in the link to your profile:",
             "privacy_settings": "The Steam profile must have certain privacy settings for the bot to access the statistics (statistics are only available a few minutes after changing the settings):",
             "link_steamID": "Your SteamID must now be linked to the Discord account with the `/stats steamid 1234567890` command. Please insert your SteamID here:",
-            "usage_complete": "The `/stats` command can now be used:"
+            "usage_complete": "The `/stats` command can now be used:",
+            "get_user": "You can also view the stats for any Steam ID by using `/stats user <ANY_STEAM_ID>`."
+        },
+
+        "vac_check": {
+            "description": "**Feature 5: /vac_check**\nThe `/vac_check` command checks the VAC ban status for a given Steam ID and monitors it for 360 days.",
+            "instructions": "`/vac_check 1234567890`: Checks the VAC ban status for the Steam ID 1234567890.",
+            "conclusion": "Upon successful input, an overview of the current VAC ban information for the specified Steam ID will be displayed. If the monitored Steam ID receives a VAC ban within the next 360 days, the bot will post a notification in the 'vac-watcher' channel to inform you."
         },
 
         "contact_support": "**For support, error reports, or feature requests, please contact {mention}. For more information and the source code of the bot, visit {github_link}.**",
