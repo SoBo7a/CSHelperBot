@@ -1,6 +1,7 @@
 ## v1.0.5
 [IMPROVEMENTS]
 - /stats: best map in stats is now based on win-rates and average rounds on each map
+- GUILD_ID is now stored in .env
 
 ## v1.0.4
 [IMPROVEMENTS]
