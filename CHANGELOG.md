@@ -1,5 +1,9 @@
 ## v1.0.7
 [FIXES]
+- Fixed win rate calculation for /stats
+
+## v1.0.7
+[FIXES]
 - Fixed issue with vac-watcher, where false positives were generated
 - Updated Readme
 - Updated translation for vac-watcher channel description
