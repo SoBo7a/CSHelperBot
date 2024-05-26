@@ -5,6 +5,7 @@
 [IMPROVEMENTS]
 - code refactoring
 - updated instructions channel with the latest changes
+- cooldown for /teams allows now 5 commands every 30 minutes
 
 ## v1.0.5
 [IMPROVEMENTS]

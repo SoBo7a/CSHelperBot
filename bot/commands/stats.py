@@ -8,7 +8,7 @@ import urllib
 
 # Dictionary to keep track of last used time
 user_last_used = {}
-
+cooldown_time = 1800 # 30 minutes = 1800 seconds
 
 def setup_stats_commands(tree: app_commands.CommandTree, guild):
     """
@@ -35,13 +35,26 @@ def setup_stats_commands(tree: app_commands.CommandTree, guild):
     async def stats(interaction: Interaction, setup_steamid: str = None, user: str = None):
         discord_id = str(interaction.user.id)
         current_time = time.time()
-
+        
         # Check if user is rate limited
         if setup_steamid is None and discord_id in user_last_used:
-            last_used = user_last_used[discord_id]
-            if current_time - last_used < 180:  # 3 minutes = 180 seconds
+            user_info = user_last_used[discord_id]
+            first_use_time = user_info['first_use_time']
+            use_count = user_info['use_count']
+
+            # Check if the user is within the cooldown period
+            if current_time - first_use_time < cooldown_time and use_count >= 5:
                 await interaction.response.send_message(translate("commands.stats.cooldown"), ephemeral=True)
                 return
+            # Reset the count and timestamp if more than cooldown_time have passed
+            elif current_time - first_use_time >= cooldown_time:
+                user_last_used[discord_id] = {'first_use_time': current_time, 'use_count': 0}
+
+        # Initialize or update the command usage count and timestamp
+        if discord_id not in user_last_used:
+            user_last_used[discord_id] = {'first_use_time': current_time, 'use_count': 0}
+
+        user_last_used[discord_id]['use_count'] += 1
 
         if setup_steamid:
             # If a Steam ID is provided, set it up
@@ -124,7 +137,4 @@ def setup_stats_commands(tree: app_commands.CommandTree, guild):
                     await interaction.response.send_message("Failed to retrieve stats data.")
             else:
                 await interaction.response.send_message(translate("commands.stats.steamId_missing"))
-        
-        # Update the last used time for the user
-        if setup_steamid is None and user is None:
-            user_last_used[discord_id] = current_time
+                
