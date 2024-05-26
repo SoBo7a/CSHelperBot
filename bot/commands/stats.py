@@ -106,7 +106,7 @@ def setup_stats_commands(tree: app_commands.CommandTree, guild):
                         total_matches_won = get_value_by_key(player_stats, 'total_matches_won')
                         total_matches_played = get_value_by_key(player_stats, 'total_matches_played')
                         if total_matches_played > 0:
-                            win_rate = f'{(round(total_matches_won / total_matches_played, 2))} %'
+                            win_rate = f'{(round(total_matches_won / total_matches_played, 2) * 100)} %'
                         else:
                             win_rate = '0 %'
 
