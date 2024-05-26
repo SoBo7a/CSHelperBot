@@ -46,7 +46,7 @@ GUILD_ID = YOUR_GUILD_ID
 
 6. Create the databases:
 - Create a folder called "data" in the root directory of the project.
-- Create the "patchnotes.db", "play.db" and "stats.db" files in the "data" directory
+- Create the "vac_check.db", "patchnotes.db", "play.db" and "stats.db" files in the "data" directory
 
 7. Run the bot:
 ```bash

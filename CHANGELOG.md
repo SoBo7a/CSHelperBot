@@ -1,3 +1,8 @@
+## v1.0.7
+[FIXES]
+- Fixed issue with vac-watcher, where false positives were generated
+- Updated Readme
+
 ## v1.0.6
 [FEATURES]
 - Added the /vac_check command, allowing users to monitor SteamIDs for 360 days and receive notifications if any of the monitored SteamIDs are VAC banned.

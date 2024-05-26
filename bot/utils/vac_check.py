@@ -116,10 +116,9 @@ async def check_for_bans(channel):
             
             if player_bans:
                 latest_number_of_vac_bans = player_bans.get('NumberOfVACBans', 0)
-                latest_days_since_last_ban = player_bans.get('DaysSinceLastBan', 0)
                 
                 # Compare the ban information with the database
-                if latest_number_of_vac_bans > number_of_vac_bans or latest_days_since_last_ban > days_since_last_ban:
+                if latest_number_of_vac_bans > number_of_vac_bans:
                     await post_content(channel, steam_id, player_bans, discord_user_id)
                     remove_entry_by_steam_id(steam_id)
                 # For testing only!!!
