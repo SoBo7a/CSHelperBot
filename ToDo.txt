@@ -1,4 +1,4 @@
-- !!!merge all databases into one!!!
+- merge all databases into one?!
 
 - add more stats
 - improve best weapon by calculating kill rates
